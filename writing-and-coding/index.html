@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="liyan">
+  <meta name="dcterms.date" content="2021-04-05">
+  <title>写作与编码</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/reveal.js/4.1.0/reset.css">
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/reveal.js/4.1.0/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/reveal.js/4.1.0/theme/moon.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">写作与编码</h1>
+  <p class="author">liyan</p>
+  <p class="date">2021-04-05</p>
+</section>
+
+<section>
+<section id="一门课" class="title-slide slide level2">
+<h2>一门课</h2>
+
+</section>
+<section id="极客时间人人都用得上的写作课" class="slide level3">
+<h3>[极客时间]人人都用得上的写作课</h3>
+<ul>
+<li><a href="https://time.geekbang.org/column/intro/356" class="uri">https://time.geekbang.org/column/intro/356</a></li>
+<li>副标题：让文字表达成为你的加分项</li>
+<li>讲师：涵柏（笔名），一线资深记者</li>
+<li>碎片化时代的注意力写作法</li>
+<li>8 大必备写作方法精讲</li>
+<li>60+ 对比式写作案例分析</li>
+<li>4 大常用的写作场景训练</li>
+</ul>
+</section>
+<section id="overview" class="slide level3">
+<h3>Overview</h3>
+<p><img src="Lesson.svg" alt="drawing" height="600"/></p>
+</section>
+<section id="原则篇" class="slide level3">
+<h3>原则篇</h3>
+<ul>
+<li>让阅读帮到写作
+<ul>
+<li>读什么？/ 怎么读？</li>
+</ul></li>
+<li>要能识别文章好坏
+<ul>
+<li>行文节奏：简单即美</li>
+<li>文字表述：先要确保准确，才能推敲词藻</li>
+<li>主题刻画：鲜明与否？突出与否？# 选取切入角度</li>
+</ul></li>
+<li>写作避坑指南
+<ul>
+<li>滥用形容词和连词 / 中文西化 / 随意堆砌段落 / 缺乏逻辑思维</li>
+</ul></li>
+</ul>
+</section>
+<section id="方法篇" class="slide level3">
+<h3>方法篇</h3>
+<ul>
+<li>宏观角度3个方法
+<ul>
+<li>这个功能的意图：挖掘主题和明确主线</li>
+<li>文章布局：从主线开始，扩展结构，展开结构</li>
+<li>有效修改：最后的雕琢也是从宏观角度</li>
+</ul></li>
+<li>剩余的5个方法
+<ul>
+<li>开篇制胜的开题手段</li>
+<li>把握叙事的节奏</li>
+<li>人物出场、细节打磨和遣词造句</li>
+</ul></li>
+</ul>
+</section>
+<section id="应用篇" class="slide level3">
+<h3>应用篇</h3>
+<ul>
+<li>如何快速写出一篇高质量的热点文章</li>
+<li>如何写出兼具营销性的好软文</li>
+<li>如何完成一篇个人总结或演讲稿</li>
+<li>如何用心讲好一个故事</li>
+</ul>
+</section>
+<section id="more-to-learn" class="slide level3">
+<h3>More to Learn</h3>
+<ul>
+<li><a href="https://weread.qq.com/web/reader/7e932f907166b2fc7e991bb">《哈佛非虚构写作课：怎样讲好一个故事》</a></li>
+<li><a href="https://weread.qq.com/web/reader/eb132c2071726b29eb1f93b">《逻辑学是什么》</a> by 陈波</li>
+<li><a href="https://weread.qq.com/web/reader/0473270058addd047f1f76a">《故事：材质、结构、风格和银幕剧作的原理》</a> by 罗伯特·麦基</li>
+</ul>
+</section></section>
+<section>
+<section id="写出好文章好代码的原则" class="title-slide slide level2">
+<h2>写出好文章/好代码的原则</h2>
+
+</section>
+<section id="优质的输入是输出的刚需" class="slide level3">
+<h3>优质的输入是输出的刚需</h3>
+<ul>
+<li>区分阅读：深度阅读和浏览</li>
+<li>提炼观点、提出问题、联想和随时记录</li>
+<li><a href="https://mp.weixin.qq.com/s/xLQsz5SkHh54Zw5VSNnTaA">如何阅读一份源代码？</a>
+<ul>
+<li>先跑起来</li>
+<li>明确自己的目的</li>
+<li>利用好测试用例</li>
+<li>厘清核心数据结构之间的关系</li>
+<li>多问自己几个问题</li>
+<li>写自己的代码阅读笔记</li>
+</ul></li>
+</ul>
+</section>
+<section id="好的标准" class="slide level3">
+<h3>好的标准</h3>
+<ul>
+<li>好文章的特征
+<ul>
+<li>文字简单清晰 / 用词恰如其分 / 描写精准、服务主题</li>
+</ul></li>
+<li><a href="https://baike.baidu.com/item/三美/9167713">闻一多的“三美”主张</a> 诗歌的三美，文章亦如是
+<ul>
+<li>建筑美
+<ul>
+<li>文章的结构上要起承转合，均齐匀称</li>
+</ul></li>
+<li>音乐美
+<ul>
+<li>叙事的节奏上体现出音乐的美感，读起来很流畅</li>
+</ul></li>
+<li>绘画美 🎵 细节上能调动五感，读起来有代入感</li>
+</ul></li>
+<li>代码三性：可读性/可维护性/可测试性</li>
+</ul>
+</section>
+<section id="代码避坑指南" class="slide level3">
+<h3>代码避坑指南</h3>
+<ul>
+<li>引入不必要的定义、实体或类库
+<ul>
+<li>徒增学习成本和心智负担</li>
+</ul></li>
+<li><a href="https://cloud.tencent.com/developer/article/1525574">Knuth’s optimization principle</a>
+<ul>
+<li>什么是过早优化？试图在为时尚早的阶段提高效率的行为</li>
+<li>过早优化的原因？未能对任务进行正确的优先级排序-功能先于性能？</li>
+<li>怎么做
+<ul>
+<li>为什么要优化，这样做的成本和好处是什么</li>
+<li>可能带来的负面后果是什么，等待的优点和缺点是什么，除了优化还能做什么</li>
+</ul></li>
+</ul></li>
+</ul>
+</section></section>
+<section>
+<section id="写出好文章好代码的方法" class="title-slide slide level2">
+<h2>写出好文章/好代码的方法</h2>
+
+</section>
+<section id="主题你要表达什么" class="slide level3">
+<h3>主题：你要表达什么？</h3>
+<ul>
+<li>文档
+<ul>
+<li>为实现一个功能，写一篇设计文档</li>
+<li>为帮助线上小伙伴运维服务，先一篇操作手册</li>
+<li>和团队小伙伴分享一个技术主题</li>
+<li>为自己写一份工作周报/个人总结</li>
+</ul></li>
+<li>代码
+<ul>
+<li>这个函数要做什么</li>
+<li>输出的参数是什么</li>
+<li>输出的结果是什么</li>
+</ul></li>
+</ul>
+</section>
+<section id="谋篇布局" class="slide level3">
+<h3>谋篇布局</h3>
+<ul>
+<li>确定主线
+<ul>
+<li>文章的真正主线不是一个词语，而是一个连贯的句子，这个句子一定能够清晰地概括整篇文章</li>
+</ul></li>
+<li>通过三段式的经典结构搭建出骨架
+<ul>
+<li>是什么(触发点) 具体表现是什么</li>
+<li>为什么(冲突) 产生矛盾的原因是什么</li>
+<li>怎么办(解决) 新的看法或最终的结果</li>
+</ul></li>
+<li>通过时空坐标系展开骨架
+<ul>
+<li>按照时间线开展你的写作
+<ul>
+<li>时间跨度长/事件或者人物主角出现的场景不断变化</li>
+</ul></li>
+<li>空间或逻辑顺序</li>
+</ul></li>
+</ul>
+</section>
+<section id="软件架构的谋篇布局" class="slide level3">
+<h3>软件架构的谋篇布局</h3>
+<ul>
+<li>系统边界在哪里
+<ul>
+<li>消除未知之未知 <a href="../10-step-system/#/the-breadth-of-the-subject">十步学习法</a> 方法背后的逻辑</li>
+</ul></li>
+<li>核心组件有哪些</li>
+<li>它们如何交互
+<ul>
+<li>部署图</li>
+<li>数据流图</li>
+<li>序列图</li>
+</ul></li>
+</ul>
+</section>
+<section id="何谓有效修改" class="slide level3">
+<h3>何谓有效修改？</h3>
+<ul>
+<li>即使是很棒的初稿，完成度最高不会超过 70%</li>
+<li>从宏观角度着眼的雕琢</li>
+<li>三步修改法
+<ol type="1">
+<li>从宏观上把控内容，先增后减；把控叙事距离</li>
+<li>修改论据：论据是否得当，决定了你这篇文章是否言之有物、言之有理、言之有据</li>
+<li>整体表述的连贯性：设置好的路标</li>
+</ol></li>
+</ul>
+</section></section>
+<section>
+<section id="程序员的写作" class="title-slide slide level2">
+<h2>程序员的写作</h2>
+
+</section>
+<section id="team-内使用的文档" class="slide level3">
+<h3>Team 内使用的文档</h3>
+<ul>
+<li>Think twice / Code Once</li>
+<li>需求分析/设计
+<ul>
+<li>主题是什么？</li>
+<li>如何展开？</li>
+</ul></li>
+</ul>
+</section>
+<section id="包括兄弟团队的技术分享" class="slide level3">
+<h3>包括兄弟团队的技术分享</h3>
+<ul>
+<li>Learn-Do-Learn-Teach</li>
+<li>主题分享的展开套路
+<ul>
+<li>在写这篇文章的时候我面临什么样的场景？我为什么要写这篇文章？通过这篇文章你能获得什么？</li>
+<li>我想解决的问题是什么？</li>
+<li>我如何解决这个问题？</li>
+<li>我编写文章时引用的资料、我推荐的阅读延伸资料、你进一步的行动指南</li>
+</ul></li>
+</ul>
+</section>
+<section id="给协作者看的文档" class="slide level3">
+<h3>给协作者看的文档</h3>
+<ul>
+<li>使用说明
+<ul>
+<li>主题是什么？</li>
+<li>如何展开？可以参考主题分享的套路</li>
+</ul></li>
+<li>工作流程
+<ul>
+<li>目标设定</li>
+<li>行动计划：3W3H 要素
+<ul>
+<li>What/Who/When/How/How To Measure/How Much</li>
+</ul></li>
+</ul></li>
+</ul>
+</section>
+<section id="汇报文档" class="slide level3">
+<h3>汇报文档</h3>
+<ul>
+<li>给团队成员和 Leader 看的文档</li>
+<li>周报/工作总结 <a href="https://wiki.infervision.com/pages/viewpage.action?pageId=291275312">如何做工作汇报</a>
+<ul>
+<li>厘清思路：Why-What-How/5W1H/STAR</li>
+<li>汇报技巧：突出重点/简明扼要/复述要点</li>
+</ul></li>
+<li>复盘</li>
+</ul>
+</section>
+<section id="more-to-learn-2" class="slide level3">
+<h3>More to Learn 2</h3>
+<ul>
+<li><a href="https://weread.qq.com/web/reader/3ad32b605d18c13ad3c25fa">向上管理：如何正确汇报工作？</a> by 蒋巍巍</li>
+<li><a href="https://xie.infoq.cn/article/67a77d8d71ce20fa365f10f92">程序员的写作课</a></li>
+<li><a href="https://time.geekbang.org/column/article/41332">写字如编码</a> 把每一篇文字当作一个需求，把写作当成在编码的过程去完成这个需求，对应程序开发过程：需求、设计、实现、测试和交付五个阶段。</li>
+</ul>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://cdn.bootcdn.net/ajax/libs/reveal.js/4.1.0/reveal.js"></script>
+
+  // reveal.js plugins
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Push each slide change to the browser history
+        history: true,
+        slideNumber: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
