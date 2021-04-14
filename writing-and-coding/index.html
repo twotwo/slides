@@ -53,8 +53,8 @@
 <h3>Overview</h3>
 <p><img src="Lesson.svg" alt="drawing" height="600"/></p>
 </section>
-<section id="原则篇" class="slide level3">
-<h3>原则篇</h3>
+<section id="原理篇" class="slide level3">
+<h3>原理篇</h3>
 <ul>
 <li>让阅读帮到写作
 <ul>
@@ -152,18 +152,26 @@
 <section id="代码避坑指南" class="slide level3">
 <h3>代码避坑指南</h3>
 <ul>
-<li>引入不必要的定义、实体或类库
+<li>不合理的功能拆解和接口设计
+<ul>
+<li>SRP / OCP</li>
+</ul></li>
+<li>实现时引入不必要的定义、实体或类库
 <ul>
 <li>徒增学习成本和心智负担</li>
 </ul></li>
 <li><a href="https://cloud.tencent.com/developer/article/1525574">Knuth’s optimization principle</a>
 <ul>
-<li>什么是过早优化？试图在为时尚早的阶段提高效率的行为</li>
-<li>过早优化的原因？未能对任务进行正确的优先级排序-功能先于性能？</li>
+<li>啥是过早优化？过早提高效率的行为</li>
+<li>过早优化的原因？任务没有正确的优先级排序
+<ul>
+<li>功能完善vs性能提升 / 开发效率vs性能</li>
+<li>稳定性&amp;可维护性vs性能</li>
+</ul></li>
 <li>怎么做
 <ul>
-<li>为什么要优化，这样做的成本和好处是什么</li>
-<li>可能带来的负面后果是什么，等待的优点和缺点是什么，除了优化还能做什么</li>
+<li>优化的成本和好处，可能的负面后果是啥？</li>
+<li>不做的优点和缺点是啥，除了优化还能做啥？</li>
 </ul></li>
 </ul></li>
 </ul>
@@ -325,11 +333,9 @@
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
-        // Push each slide change to the browser history
         history: true,
         slideNumber: true,
 
-        // reveal.js plugins
         plugins: [
           RevealNotes,
           RevealSearch,
