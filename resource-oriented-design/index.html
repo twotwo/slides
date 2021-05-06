@@ -5,12 +5,12 @@
   <meta name="generator" content="pandoc">
   <meta name="author" content="liyan">
   <meta name="dcterms.date" content="2021-05-05">
-  <title>分布式服务接口设计</title>
+  <title>面向资源的接口设计</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/reset.css">
-  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/reveal.css">
+  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -20,14 +20,14 @@
     ul.task-list{list-style: none;}
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
-  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/theme/moon.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/dist/theme/moon.css" id="theme">
 </head>
 <body>
   <div class="reveal">
     <div class="slides">
 
 <section id="title-slide">
-  <h1 class="title">分布式服务接口设计</h1>
+  <h1 class="title">面向资源的接口设计</h1>
   <p class="author">liyan</p>
   <p class="date">2021-05-05</p>
 </section>
@@ -42,12 +42,11 @@
 <ul>
 <li>RPC
 <ul>
-<li>面向过程，以效率为第一目标</li>
+<li>基于接口和方法设计，以效率为第一目标</li>
 </ul></li>
 <li>DICOM
 <ul>
 <li>Digital Imaging and Communications in Medicine，一组通用的标准协定，规定医学影像如何处理、储存、打印和传输</li>
-<li>面向影像数据，基于 TCP/IP</li>
 </ul></li>
 <li>RESTful
 <ul>
@@ -55,6 +54,13 @@
 <li>适用于一切网络没有成为性能瓶颈的应用场景</li>
 </ul></li>
 </ul>
+<aside class="notes">
+<p>This is my note.</p>
+<ul>
+<li>RPC 面向过程，基于 socket</li>
+<li>DICOM 面向影像数据，传输基于 socket</li>
+</ul>
+</aside>
 </section>
 <section id="graphql---为-api-而生的查询语言" class="slide level3">
 <h3>GraphQL - 为 API 而生的查询语言</h3>
@@ -226,21 +232,192 @@
 <h2>服务接口设计实践</h2>
 
 </section>
-<section id="基于资源的设计" class="slide level3">
-<h3>基于资源的设计</h3>
+<section id="面向资源的设计" class="slide level3">
+<h3>面向资源的设计</h3>
+<ul>
+<li>面向过程来设计接口
+<ul>
+<li>随着功能的变化，可能是形成一堆庞大而混乱的 API 接口。开发者必须单独学习每种方法。显然，这既耗时又容易出错</li>
+</ul></li>
+<li>面向资源来设计接口
+<ul>
+<li>定义可以用少量方法控制的命名资源，方法自然映射为 HTTP 方法</li>
+</ul></li>
+<li>面向资源的设计原则
+<ul>
+<li>改变面向过程来设计接口的思考方式，复用 RESTful 设计风格，从而提高可用性并降低复杂性</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>面向资源来设计接口</p>
+<ul>
+<li>这些资源和方法被称为 API 的“名词”和“动词”</li>
+<li>让资源拥有的标准方法比较少，这使得要学习的内容减少了很多，因此开发人员可以专注于资源及其关系</li>
+</ul>
+<p>RPC 接口也是可以应用面向资源的设计原则的</p>
+<ul>
+<li>RESTful 风格取得了巨大的成功，2010年有 74% 的公共网络 API 是 RESTful 的；</li>
+<li>而在数据中心内，基于 socket 的 RPC API 来承载大多数网络流量，比前者高几个数量级</li>
+</ul>
+</aside>
+</section>
+<section id="标准方法" class="slide level3">
+<h3>标准方法</h3>
+<table>
+<thead>
+<tr class="header">
+<th>标准方法</th>
+<th>HTTP 映射</th>
+<th>HTTP 请求正文</th>
+<th>HTTP 响应正文</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>List</td>
+<td>GET <collection URL></td>
+<td>无</td>
+<td>资源*列表</td>
+</tr>
+<tr class="even">
+<td>Get</td>
+<td>GET <resource URL></td>
+<td>无</td>
+<td>资源*</td>
+</tr>
+<tr class="odd">
+<td>Create</td>
+<td>POST <collection URL></td>
+<td>资源</td>
+<td>资源*</td>
+</tr>
+<tr class="even">
+<td>Update</td>
+<td>PUT or PATCH <resource URL></td>
+<td>资源</td>
+<td>资源*</td>
+</tr>
+<tr class="odd">
+<td>Delete</td>
+<td>DELETE <resource URL></td>
+<td>不适用</td>
+<td>google.protobuf.Empty**</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="自定义方法" class="slide level3">
+<h3>自定义方法</h3>
+<table>
+<thead>
+<tr class="header">
+<th>方法名称</th>
+<th>自定义动词</th>
+<th>HTTP 动词</th>
+<th>备注</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>取消</td>
+<td>:cancel</td>
+<td>POST</td>
+<td>取消一个未完成的操作</td>
+</tr>
+<tr class="even">
+<td>batchGet</td>
+<td>:batchGet</td>
+<td>GET</td>
+<td>批量获取多个资源</td>
+</tr>
+<tr class="odd">
+<td>移动</td>
+<td>:move</td>
+<td>POST</td>
+<td>将资源从一个父级移动到另一个父级</td>
+</tr>
+<tr class="even">
+<td>搜索</td>
+<td>:search</td>
+<td>GET</td>
+<td>List 的替代方法</td>
+</tr>
+<tr class="odd">
+<td>恢复删除</td>
+<td>:undelete</td>
+<td>POST</td>
+<td>恢复已删除资源</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
+<ul>
+<li>取消：operations.cancel</li>
+<li>移动：folders.move</li>
+<li>搜索：services.search</li>
+<li>恢复删除：services.undelete。建议的保留期限为 30 天</li>
+</ul>
+<p>接下来让我们看看怎么把一个接口改造成符合面向资源的设计风格</p>
+</aside>
+</section>
+<section id="rmm-level-0-完全不-rest" class="slide level3">
+<h3>RMM Level 0 完全不 REST</h3>
+<ul>
+<li>我们的需求是设计一个门诊预约系统：查看某大夫在指定日期是否有空闲，以便预约
+<ul>
+<li>医院开放了一个 /appointmentService 的 Web API，传入日期、医生姓名作为参数，就可以得到该时间段、该医生的空闲时间</li>
+<li>得到空闲结果后，提交预约信息：预约成功或者失败</li>
+</ul></li>
+</ul>
+<figure>
+<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level0.png" alt="RMM Level 0" /><figcaption aria-hidden="true">RMM Level 0</figcaption>
+</figure>
+<aside class="notes">
+<p>RPC 风格</p>
+</aside>
+</section>
+<section id="rmm-level-1-引入资源概念" class="slide level3">
+<h3>RMM Level 1 引入资源概念</h3>
+<figure>
+<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level1.png" alt="RMM Level 1" /><figcaption aria-hidden="true">RMM Level 1</figcaption>
+</figure>
+</section>
+<section id="rmm-level-2-引入统一接口" class="slide level3">
+<h3>RMM Level 2 引入统一接口</h3>
+<figure>
+<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level2.png" alt="RMM Level 2" /><figcaption aria-hidden="true">RMM Level 2</figcaption>
+</figure>
+<aside class="notes">
+<p>引入统一接口，映射到 HTTP Method 上</p>
+</aside>
+</section>
+<section id="rmm-level-3-超文本驱动" class="slide level3">
+<h3>RMM Level 3 超文本驱动</h3>
+<figure>
+<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png" alt="RMM Level 3" /><figcaption aria-hidden="true">RMM Level 3</figcaption>
+</figure>
+<aside class="notes">
+<ul>
+<li>Hypermedia Controls：在咱们课程里面的说法是“超文本驱动”，</li>
+<li>Hypertext as the Engine of Application State（HATEOAS），都说的是同一件事情。
+<ul>
+<li>在 Fielding 论文里</li>
+</ul></li>
+</ul>
+</aside>
 </section>
 <section id="reference-2" class="slide level3">
 <h3>Reference 2</h3>
 <ul>
+<li><a href="https://cloud.google.com/apis/design" class="uri">https://cloud.google.com/apis/design</a></li>
 <li><a href="https://martinfowler.com/articles/richardsonMaturityModel.html" class="uri">https://martinfowler.com/articles/richardsonMaturityModel.html</a></li>
 <li><a href="http://wiki.li3huo.com/Idempotence" class="uri">http://wiki.li3huo.com/Idempotence</a></li>
-<li><a href="https://cloud.google.com/apis/design" class="uri">https://cloud.google.com/apis/design</a></li>
 </ul>
 </section></section>
     </div>
   </div>
 
-  <script src="https://cdn.li3huo.com/reveal/4.1.0/reveal.js"></script>
+  <script src="https://cdn.li3huo.com/reveal/4.1.0/dist/reveal.js"></script>
 
   // reveal.js plugins
   <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
@@ -252,11 +429,11 @@
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
         // Push each slide change to the browser history
         history: true,
-        // Transition style
-        transition: 'linear', // none/fade/slide/convex/concave/zoom
-        slideNumber: true,
+
         // reveal.js plugins
         plugins: [
           RevealNotes,

@@ -1,4 +1,4 @@
-% 分布式服务接口设计
+% 面向资源的接口设计
 % liyan
 % 2021-05-05
 
@@ -7,13 +7,21 @@
 ### 应用到的协议
 
 - RPC
-  - 面向过程，以效率为第一目标
+  - 基于接口和方法设计，以效率为第一目标
 - DICOM
   - Digital Imaging and Communications in Medicine，一组通用的标准协定，规定医学影像如何处理、储存、打印和传输
-  - 面向影像数据，基于 TCP/IP
 - RESTful
   - Representation State Transfer，是面向资源的一种编程风格，基于 HTTP
   - 适用于一切网络没有成为性能瓶颈的应用场景
+
+::: notes
+
+This is my note.
+
+- RPC 面向过程，基于 socket
+- DICOM 面向影像数据，传输基于 socket
+
+:::
 
 ### GraphQL - 为 API 而生的查询语言
 
@@ -117,10 +125,103 @@
 
 ## 服务接口设计实践
 
-### 基于资源的设计
+### 面向资源的设计
+
+- 面向过程来设计接口
+  - 随着功能的变化，可能是形成一堆庞大而混乱的 API 接口。开发者必须单独学习每种方法。显然，这既耗时又容易出错
+- 面向资源来设计接口
+  - 定义可以用少量方法控制的命名资源，方法自然映射为 HTTP 方法
+- 面向资源的设计原则
+  - 改变面向过程来设计接口的思考方式，复用 RESTful 设计风格，从而提高可用性并降低复杂性
+
+::: notes
+
+面向资源来设计接口
+
+- 这些资源和方法被称为 API 的“名词”和“动词”
+- 让资源拥有的标准方法比较少，这使得要学习的内容减少了很多，因此开发人员可以专注于资源及其关系
+
+RPC 接口也是可以应用面向资源的设计原则的
+
+- RESTful 风格取得了巨大的成功，2010年有 74% 的公共网络 API 是 RESTful 的；
+- 而在数据中心内，基于 socket 的 RPC API 来承载大多数网络流量，比前者高几个数量级
+
+:::
+
+
+### 标准方法
+
+|标准方法|HTTP 映射|HTTP 请求正文|HTTP 响应正文|
+|--|--|--|--|
+|List	|GET <collection URL>|无|资源*列表|
+|Get	|GET <resource URL>|无|资源*|
+|Create	|POST <collection URL>|资源|资源*|
+|Update	|PUT or PATCH <resource URL>|资源|资源*|
+|Delete	|DELETE <resource URL>| 不适用|google.protobuf.Empty**|
+
+### 自定义方法
+
+|方法名称|自定义动词|HTTP 动词|备注|
+|--|--|--|--|
+|取消|:cancel|POST|取消一个未完成的操作|
+|batchGet|:batchGet|GET|批量获取多个资源|
+|移动|:move|POST|将资源从一个父级移动到另一个父级|
+|搜索|:search|GET|List 的替代方法|
+|恢复删除|:undelete|POST|恢复已删除资源|
+
+::: notes
+
+- 取消：operations.cancel
+- 移动：folders.move
+- 搜索：services.search
+- 恢复删除：services.undelete。建议的保留期限为 30 天
+
+接下来让我们看看怎么把一个接口改造成符合面向资源的设计风格
+
+:::
+
+### RMM Level 0 完全不 REST
+
+- 我们的需求是设计一个门诊预约系统：查看某大夫在指定日期是否有空闲，以便预约
+  - 医院开放了一个 /appointmentService 的 Web API，传入日期、医生姓名作为参数，就可以得到该时间段、该医生的空闲时间
+  - 得到空闲结果后，提交预约信息：预约成功或者失败
+
+![RMM Level 0](https://martinfowler.com/articles/images/richardsonMaturityModel/level0.png)
+
+::: notes
+
+RPC 风格
+
+:::
+
+### RMM Level 1 引入资源概念
+
+![RMM Level 1](https://martinfowler.com/articles/images/richardsonMaturityModel/level1.png)
+
+### RMM Level 2 引入统一接口
+
+![RMM Level 2](https://martinfowler.com/articles/images/richardsonMaturityModel/level2.png)
+
+::: notes
+
+引入统一接口，映射到 HTTP Method 上
+
+:::
+
+### RMM Level 3 超文本驱动
+
+![RMM Level 3](https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png)
+
+::: notes
+
+- Hypermedia Controls：在咱们课程里面的说法是“超文本驱动”，
+- Hypertext as the Engine of Application State（HATEOAS），都说的是同一件事情。
+  - 在 Fielding 论文里
+
+:::
 
 ### Reference 2
 
+- <https://cloud.google.com/apis/design>
 - <https://martinfowler.com/articles/richardsonMaturityModel.html>
 - <http://wiki.li3huo.com/Idempotence>
-- <https://cloud.google.com/apis/design>
