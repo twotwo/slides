@@ -88,8 +88,9 @@
 </ul></li>
 </ul>
 </section>
-<section id="协议对比只有选择不同没有高下之分" class="slide level3">
-<h3>协议对比：只有选择不同，没有高下之分</h3>
+<section id="面向过程-vs-面向对象-vs-面向资源" class="slide level3">
+<h3>面向过程 VS 面向对象 VS 面向资源</h3>
+<p>只有选择不同，没有高下之分</p>
 <ul>
 <li>面向过程是为了符合计算机世界中主流的交互方式，所以重点关注输入输出
 <ul>
@@ -107,18 +108,56 @@
 </section>
 <section id="面向资源设计的通用部分" class="slide level3">
 <h3>面向资源设计的通用部分</h3>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>RESTful</th>
+<th>DICOM</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>资源</td>
+<td>HTTP Resouce</td>
+<td>DICOM 数据集</td>
+</tr>
+<tr class="even">
+<td>展示</td>
+<td>Representation</td>
+<td>SoP</td>
+</tr>
+<tr class="odd">
+<td></td>
+<td>一个内容的 HTML/JSON/PDF 版本</td>
+<td>/</td>
+</tr>
+<tr class="even">
+<td></td>
+<td>/</td>
+<td>一套图的 Presentation/Print/GSPS</td>
+</tr>
+<tr class="odd">
+<td>State</td>
+<td>上下文</td>
+<td>/</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
 <ul>
 <li>HTTP Resouce / DICOM 数据集</li>
 <li>Representation / Softcopy Presentation
 <ul>
-<li>REST 一个内容的 HTML/PDF/RSS 版本</li>
-<li>DICOM 一个图像的 彩色/灰度/不同窗宽窗位 显示</li>
+<li>REST 一个资源的 HTML/JSON/PDF 版本</li>
+<li>DICOM 一个图像的彩色/灰度/不同窗宽窗位 显示</li>
 </ul></li>
 <li>State
 <ul>
 <li>在特定语境中才能产生的上下文信息</li>
 </ul></li>
 </ul>
+</aside>
 </section>
 <section id="面向资源设计的优势-rest-vs-rpc" class="slide level3">
 <h3>面向资源设计的优势： REST vs RPC</h3>
@@ -235,18 +274,16 @@
 <section id="面向资源的设计" class="slide level3">
 <h3>面向资源的设计</h3>
 <ul>
-<li>面向过程来设计接口
+<li>面向过程设计接口的弊端
 <ul>
 <li>随着功能的变化，可能是形成一堆庞大而混乱的 API 接口。开发者必须单独学习每种方法。显然，这既耗时又容易出错</li>
 </ul></li>
-<li>面向资源来设计接口
+<li>面向资源的接口设计
 <ul>
 <li>定义可以用少量方法控制的命名资源，方法自然映射为 HTTP 方法</li>
+<li>基于 RPC 实现的服务，改变面向过程来设计接口的思考方式，复用 RESTful 设计风格，从而提高可用性并降低复杂性</li>
 </ul></li>
-<li>面向资源的设计原则
-<ul>
-<li>改变面向过程来设计接口的思考方式，复用 RESTful 设计风格，从而提高可用性并降低复杂性</li>
-</ul></li>
+<li>Google API 设计指南</li>
 </ul>
 <aside class="notes">
 <p>面向资源来设计接口</p>
@@ -277,25 +314,25 @@
 <td>List</td>
 <td>GET <collection URL></td>
 <td>无</td>
-<td>资源*列表</td>
+<td>资源 * 列表</td>
 </tr>
 <tr class="even">
 <td>Get</td>
 <td>GET <resource URL></td>
-<td>无</td>
-<td>资源*</td>
+<td>资源 id</td>
+<td>资源 *</td>
 </tr>
 <tr class="odd">
 <td>Create</td>
 <td>POST <collection URL></td>
 <td>资源</td>
-<td>资源*</td>
+<td>资源 *</td>
 </tr>
 <tr class="even">
 <td>Update</td>
 <td>PUT or PATCH <resource URL></td>
 <td>资源</td>
-<td>资源*</td>
+<td>资源 *</td>
 </tr>
 <tr class="odd">
 <td>Delete</td>
