@@ -39,7 +39,9 @@ This is my note.
 - 缺少对资源的“批量”操作的支持
   - 要解决批量操作这类问题，目前一种从理论上看还比较优秀的解决方案是 GraphQL
 
-### 协议对比：只有选择不同，没有高下之分
+### 面向过程 VS 面向对象 VS 面向资源
+
+只有选择不同，没有高下之分
 
 - 面向过程是为了符合计算机世界中主流的交互方式，所以重点关注输入输出
   - 单体应用进程间调用
@@ -50,12 +52,23 @@ This is my note.
 
 ### 面向资源设计的通用部分
 
+||RESTful|DICOM|
+|--|--|--|
+|资源|HTTP Resouce | DICOM 数据集 |
+|展示|Representation | SoP |
+| |一个内容的 HTML/JSON/PDF 版本|/|
+| |/ |一套图的 Presentation/Print/GSPS|
+|State|上下文|/|
+
+::: notes
+
 - HTTP Resouce / DICOM 数据集
 - Representation / Softcopy Presentation
-  - REST 一个内容的 HTML/PDF/RSS 版本
-  - DICOM 一个图像的 彩色/灰度/不同窗宽窗位 显示
+  - REST 一个资源的 HTML/JSON/PDF 版本
+  - DICOM 一个图像的彩色/灰度/不同窗宽窗位 显示
 - State
   - 在特定语境中才能产生的上下文信息
+:::
 
 ### 面向资源设计的优势： REST vs RPC
 
@@ -127,12 +140,12 @@ This is my note.
 
 ### 面向资源的设计
 
-- 面向过程来设计接口
+- 面向过程设计接口的弊端
   - 随着功能的变化，可能是形成一堆庞大而混乱的 API 接口。开发者必须单独学习每种方法。显然，这既耗时又容易出错
-- 面向资源来设计接口
+- 面向资源的接口设计
   - 定义可以用少量方法控制的命名资源，方法自然映射为 HTTP 方法
-- 面向资源的设计原则
-  - 改变面向过程来设计接口的思考方式，复用 RESTful 设计风格，从而提高可用性并降低复杂性
+  - 基于 RPC 实现的服务，改变面向过程来设计接口的思考方式，复用 RESTful 设计风格，从而提高可用性并降低复杂性
+- Google API 设计指南
 
 ::: notes
 
@@ -148,15 +161,14 @@ RPC 接口也是可以应用面向资源的设计原则的
 
 :::
 
-
 ### 标准方法
 
 |标准方法|HTTP 映射|HTTP 请求正文|HTTP 响应正文|
 |--|--|--|--|
-|List	|GET <collection URL>|无|资源*列表|
-|Get	|GET <resource URL>|无|资源*|
-|Create	|POST <collection URL>|资源|资源*|
-|Update	|PUT or PATCH <resource URL>|资源|资源*|
+|List	|GET <collection URL>|无|资源 * 列表|
+|Get	|GET <resource URL>|资源 id|资源 * |
+|Create	|POST <collection URL>|资源|资源 * |
+|Update	|PUT or PATCH <resource URL>|资源|资源 * |
 |Delete	|DELETE <resource URL>| 不适用|google.protobuf.Empty**|
 
 ### 自定义方法
