@@ -33,40 +33,51 @@
 </section>
 
 <section>
-<section id="服务接口概览" class="title-slide slide level2">
-<h2>服务接口概览</h2>
+<section id="应用协议设计方法-概览" class="title-slide slide level2">
+<h2>应用协议/设计方法 概览</h2>
 
 </section>
-<section id="应用到的协议" class="slide level3">
-<h3>应用到的协议</h3>
+<section id="应用协议一览" class="slide level3">
+<h3>应用协议一览</h3>
 <ul>
 <li>RPC
 <ul>
-<li>基于接口和方法设计，以效率为第一目标</li>
+<li>面向过程，基于 socket</li>
 </ul></li>
 <li>DICOM
 <ul>
-<li>Digital Imaging and Communications in Medicine，一组通用的标准协定，规定医学影像如何处理、储存、打印和传输</li>
+<li>面向影像数据，传输基于 socket</li>
 </ul></li>
 <li>RESTful
 <ul>
-<li>Representation State Transfer，是面向资源的一种编程风格，基于 HTTP</li>
-<li>适用于一切网络没有成为性能瓶颈的应用场景</li>
+<li>是面向资源的一种编程风格，基于 HTTP</li>
+</ul></li>
+<li>GraphQL
+<ul>
+<li>为 API 而生的查询语言，传输层无关</li>
 </ul></li>
 </ul>
 <aside class="notes">
-<p>This is my note.</p>
 <ul>
-<li>RPC 面向过程，基于 socket</li>
-<li>DICOM 面向影像数据，传输基于 socket</li>
+<li>RPC 基于接口和方法设计，以效率为第一目标</li>
+<li>DICOM
+<ul>
+<li>Digital Imaging and Communications in Medicine</li>
+<li>一组通用的标准协定，规定医学影像如何处理、储存、打印和传输</li>
+</ul></li>
+<li>RESTful
+<ul>
+<li>Representation State Transfer</li>
+<li>适用于一切网络没有成为性能瓶颈的应用场景</li>
+</ul></li>
 </ul>
 </aside>
 </section>
-<section id="graphql---为-api-而生的查询语言" class="slide level3">
-<h3>GraphQL - 为 API 而生的查询语言</h3>
+<section id="graphql-一瞥" class="slide level3">
+<h3>GraphQL 一瞥</h3>
 <ul>
 <li>2018年11月7日，Facebook 将 GraphQL 项目转移到新成立的 GraphQL 基金会（隶属于非营利性的 Linux 基金会）</li>
-<li>既是一种用于 API 的查询语言也是一个满足你数据查询的运行时</li>
+<li>既是一种用于 API 的查询语言也是一个满足你数据查询的运行时，可以与 RESTful API 共存</li>
 <li>请求你所要的数据不多不少
 <ul>
 <li>为 API 中的数据提供了一套易于理解的完整描述，使得客户端能够精准获取所需数据，没有任何冗余</li>
@@ -88,23 +99,71 @@
 </ul></li>
 </ul>
 </section>
-<section id="面向过程-vs-面向对象-vs-面向资源" class="slide level3">
-<h3>面向过程 VS 面向对象 VS 面向资源</h3>
-<p>只有选择不同，没有高下之分</p>
+<section id="设计方法一览" class="slide level3">
+<h3>设计方法一览</h3>
+<p>面向过程 -&gt; 面向对象 -&gt; 面向方法 VS 面向资源</p>
+<table>
+<thead>
+<tr class="header">
+<th></th>
+<th>交互范围</th>
+<th>数据</th>
+<th>方法</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>面向过程</td>
+<td>进程内</td>
+<td>Record</td>
+<td>Procedure</td>
+</tr>
+<tr class="even">
+<td>面向对象</td>
+<td>进程内</td>
+<td>Ojbect</td>
+<td>Method</td>
+</tr>
+<tr class="odd">
+<td>远程方法调用</td>
+<td>进程间</td>
+<td>Ojbect</td>
+<td>Method</td>
+</tr>
+<tr class="even">
+<td>RESTful</td>
+<td>网络内</td>
+<td>资源主体</td>
+<td>统一接口</td>
+</tr>
+</tbody>
+</table>
+<aside class="notes">
 <ul>
-<li>面向过程是为了符合计算机世界中主流的交互方式，所以重点关注输入输出
+<li>单体-面向过程
 <ul>
-<li>单体应用进程间调用</li>
+<li><a href="https://en.wikipedia.org/wiki/Procedural_programming" class="uri">https://en.wikipedia.org/wiki/Procedural_programming</a></li>
+<li>1970 年代 C / Pascal</li>
 </ul></li>
-<li>面向对象是为了符合现实世界的主流交互方式，所以数据与行为被封装成了对象
+<li>单体-面向对象设计
 <ul>
-<li>进程内调用</li>
+<li><a href="https://en.wikipedia.org/wiki/Object-oriented_design" class="uri">https://en.wikipedia.org/wiki/Object-oriented_design</a></li>
+<li>1970 年代 smalltalk</li>
 </ul></li>
-<li>面向资源是为了符合网络世界的主流的交互方式，所以把数据看成主体，把行为抽象成统一接口
+<li>网络-面向方法： 1970 年代
 <ul>
-<li>特别适用于前后端分离的业务场景</li>
+<li><a href="https://en.wikipedia.org/wiki/Remote_procedure_call" class="uri">https://en.wikipedia.org/wiki/Remote_procedure_call</a></li>
+<li>使用面向对象方式进行封装就是面向方法</li>
+<li>计算机世界主流的交互方式，重点关注输入输出</li>
+</ul></li>
+<li>网络-面向资源： 2010
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Representational_state_transfer" class="uri">https://en.wikipedia.org/wiki/Representational_state_transfer</a></li>
+<li>网络世界主流交互方式：比如前后端分离应用场景</li>
 </ul></li>
 </ul>
+<p>应用场景的差异对比</p>
+</aside>
 </section>
 <section id="面向资源设计的通用部分" class="slide level3">
 <h3>面向资源设计的通用部分</h3>
@@ -159,8 +218,8 @@
 </ul>
 </aside>
 </section>
-<section id="面向资源设计的优势-rest-vs-rpc" class="slide level3">
-<h3>面向资源设计的优势： REST vs RPC</h3>
+<section id="面向资源优于面向方法的地方" class="slide level3">
+<h3>面向资源优于面向方法的地方</h3>
 <ul>
 <li>降低了服务接口的学习成本</li>
 <li>资源天然具有集合与层次结构</li>
@@ -180,8 +239,8 @@
 </ul>
 </section></section>
 <section>
-<section id="理解-rest" class="title-slide slide level2">
-<h2>理解 REST</h2>
+<section id="rest---面向资源设计总结" class="title-slide slide level2">
+<h2>REST - 面向资源设计总结</h2>
 
 </section>
 <section id="rest-风格的系统特征" class="slide level3">
@@ -221,43 +280,40 @@
 </ul></li>
 </ul>
 </section>
-<section id="richardson-成熟度模型" class="slide level3">
-<h3>Richardson 成熟度模型</h3>
-<ul>
-<li>Richardson 成熟度模型（Richardson Maturity Model，RMM）让之前不使用 REST 的服务能够逐步导入 REST</li>
-<li>Richardson 将服务接口按照“REST 的程度”从低到高分为 0 至 3 共 4 级：
-<ul>
-<li>Level 0 //一个 URI 支持全部请求</li>
-<li>Level 1 - Resources</li>
-<li>Level 2 - HTTP Verbs</li>
-<li>Level 3 - Hypermedia Controls //HATEOAS(Hypertext As The Engine Of Application State)</li>
-</ul></li>
-</ul>
-</section>
-<section id="steps-toward-rest" class="slide level3">
-<h3>Steps toward REST</h3>
-<figure>
-<img data-src="./maturity-model.png" alt="Steps toward REST" /><figcaption aria-hidden="true">Steps toward REST</figcaption>
-</figure>
-</section>
 <section id="rest-的不足与争议" class="slide level3">
 <h3>REST 的不足与争议</h3>
 <ul>
-<li>争议1：面向资源的编程思想只适合做 CRUD，只有面向过程、面向对象编程才能处理复杂的业务逻辑
+<li>争议1：RESTful 只适合做 CRUD？
 <ul>
+<li>面向资源的编程思想太简单了，只有面向过程、面向对象编程才能处理复杂的业务逻辑？？</li>
 <li>所有基于网络的操作逻辑，都可以通过解决“信息在服务端与客户端之间如何流动”这个问题来理解</li>
+</ul></li>
+<li>最佳实践
+<ul>
 <li>比较抽象的场景，按 Google 推荐的 REST API 风格来拓展 HTTP 标准方法</li>
+<li>用户登录/登出场景的设计: Sessions</li>
 </ul></li>
 </ul>
 </section>
 <section id="rest-的不足与争议-2" class="slide level3">
 <h3>REST 的不足与争议 2</h3>
 <ul>
-<li>争议2：REST 与 HTTP 完全绑定，不适用于要求高性能传输的场景中
+<li>争议2：REST 无法满足高性能要求？
 <ul>
-<li>HTTP 是应用层协议，而不是传输层协议</li>
-<li>对于需要直接控制传输（如二进制细节 / 编码形式 / 报文格式 / 连接方式等）细节的场景，REST 确实不合适</li>
+<li>REST 与 HTTP 完全绑定，不适用于要求高性能传输的场景中？？</li>
+<li>REST 一般都是基于 HTTP/1.1，性能的确很差</li>
+<li>gRPC 比 REST 快是因为通讯在HTTP/2 上</li>
 </ul></li>
+<li>最佳实践
+<ul>
+<li><a href="https://medium.com/@bimeshde/grpc-vs-rest-performance-simplified-fd35d01bbd4">REST over HTTP/2</a></li>
+<li><img src="rest-over-http2.jpg" alt="Benchmark" height="200"></li>
+</ul></li>
+</ul>
+</section>
+<section id="rest-的不足与争议-3" class="slide level3">
+<h3>REST 的不足与争议 3</h3>
+<ul>
 <li>争议3：REST 没有传输可靠性支持
 <ul>
 <li>REST 并没有提供对传输可靠性的支持</li>
@@ -265,6 +321,60 @@
 <li>HTTP 协议要求 GET、PUT 和 DELETE 操作应该具有幂等性（Idempotency）</li>
 </ul></li>
 </ul>
+</section>
+<section id="richardson-成熟度模型" class="slide level3">
+<h3>Richardson 成熟度模型</h3>
+<ul>
+<li><a href="https://martinfowler.com/articles/richardsonMaturityModel.html">Richardson 成熟度模型</a>（Richardson Maturity Model，RMM）</li>
+<li>指导之前不使用 REST 的服务逐步导入 REST</li>
+<li><img data-src="./maturity-model.png" title="fig:" alt="Steps toward REST" /></li>
+</ul>
+</section>
+<section id="rmm-level-0-完全不-rest" class="slide level3">
+<h3>RMM Level 0 完全不 REST</h3>
+<ul>
+<li>我们的需求是设计一个门诊预约系统：查看某大夫在指定日期是否有空闲，以便预约
+<ul>
+<li>医院开放了一个 /appointmentService 的 Web API，传入日期、医生姓名作为参数，就可以得到该时间段、该医生的空闲时间</li>
+<li>得到空闲结果后，提交预约信息：预约成功或者失败</li>
+</ul></li>
+</ul>
+<figure>
+<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level0.png" alt="RMM Level 0" /><figcaption aria-hidden="true">RMM Level 0</figcaption>
+</figure>
+<aside class="notes">
+<p>RPC 风格</p>
+</aside>
+</section>
+<section id="rmm-level-1-引入资源概念" class="slide level3">
+<h3>RMM Level 1 引入资源概念</h3>
+<figure>
+<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level1.png" alt="RMM Level 1" /><figcaption aria-hidden="true">RMM Level 1</figcaption>
+</figure>
+</section>
+<section id="rmm-level-2-引入统一接口" class="slide level3">
+<h3>RMM Level 2 引入统一接口</h3>
+<figure>
+<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level2.png" alt="RMM Level 2" /><figcaption aria-hidden="true">RMM Level 2</figcaption>
+</figure>
+<aside class="notes">
+<p>引入统一接口，映射到 HTTP Method 上</p>
+</aside>
+</section>
+<section id="rmm-level-3-超文本驱动" class="slide level3">
+<h3>RMM Level 3 超文本驱动</h3>
+<figure>
+<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png" alt="RMM Level 3" /><figcaption aria-hidden="true">RMM Level 3</figcaption>
+</figure>
+<aside class="notes">
+<ul>
+<li>Hypermedia Controls：在咱们课程里面的说法是“超文本驱动”，</li>
+<li>Hypertext as the Engine of Application State（HATEOAS），都说的是同一件事情。
+<ul>
+<li>在 Fielding 论文里</li>
+</ul></li>
+</ul>
+</aside>
 </section></section>
 <section>
 <section id="服务接口设计实践" class="title-slide slide level2">
@@ -397,58 +507,102 @@
 <p>接下来让我们看看怎么把一个接口改造成符合面向资源的设计风格</p>
 </aside>
 </section>
-<section id="rmm-level-0-完全不-rest" class="slide level3">
-<h3>RMM Level 0 完全不 REST</h3>
+<section id="users-management" class="slide level3">
+<h3>Users Management</h3>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>URI</th>
+<th>GET</th>
+<th>POST</th>
+<th>PUT</th>
+<th>DELETE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/users</code></td>
+<td>Returns list of users.</td>
+<td>Create a new user.</td>
+<td><code>N/A</code></td>
+<td><code>N/A</code></td>
+</tr>
+<tr class="even">
+<td><code>/users/{userId}</code></td>
+<td>Returns a specific user.</td>
+<td><code>N/A</code></td>
+<td>Updates a user’s Info.</td>
+<td>Delete an existing user.</td>
+</tr>
+<tr class="odd">
+<td><code>/users?username={username}</code></td>
+<td>Returns user info by name.</td>
+<td><code>N/A</code></td>
+<td><code>N/A</code></td>
+<td><code>N/A</code></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="implements" class="slide level3">
+<h3>Implements</h3>
 <ul>
-<li>我们的需求是设计一个门诊预约系统：查看某大夫在指定日期是否有空闲，以便预约
-<ul>
-<li>医院开放了一个 /appointmentService 的 Web API，传入日期、医生姓名作为参数，就可以得到该时间段、该医生的空闲时间</li>
-<li>得到空闲结果后，提交预约信息：预约成功或者失败</li>
-</ul></li>
+<li><code>app/view/users.py</code></li>
+<li><code>tests/test_users.py</code></li>
+<li><code>app/repo/user.py</code></li>
+<li><code>app/domain/user.py</code></li>
 </ul>
-<figure>
-<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level0.png" alt="RMM Level 0" /><figcaption aria-hidden="true">RMM Level 0</figcaption>
-</figure>
-<aside class="notes">
-<p>RPC 风格</p>
-</aside>
 </section>
-<section id="rmm-level-1-引入资源概念" class="slide level3">
-<h3>RMM Level 1 引入资源概念</h3>
-<figure>
-<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level1.png" alt="RMM Level 1" /><figcaption aria-hidden="true">RMM Level 1</figcaption>
-</figure>
-</section>
-<section id="rmm-level-2-引入统一接口" class="slide level3">
-<h3>RMM Level 2 引入统一接口</h3>
-<figure>
-<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level2.png" alt="RMM Level 2" /><figcaption aria-hidden="true">RMM Level 2</figcaption>
-</figure>
-<aside class="notes">
-<p>引入统一接口，映射到 HTTP Method 上</p>
-</aside>
-</section>
-<section id="rmm-level-3-超文本驱动" class="slide level3">
-<h3>RMM Level 3 超文本驱动</h3>
-<figure>
-<img data-src="https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png" alt="RMM Level 3" /><figcaption aria-hidden="true">RMM Level 3</figcaption>
-</figure>
-<aside class="notes">
-<ul>
-<li>Hypermedia Controls：在咱们课程里面的说法是“超文本驱动”，</li>
-<li>Hypertext as the Engine of Application State（HATEOAS），都说的是同一件事情。
-<ul>
-<li>在 Fielding 论文里</li>
-</ul></li>
-</ul>
-</aside>
+<section id="authentication-with-session" class="slide level3">
+<h3>Authentication with Session</h3>
+<table>
+<colgroup>
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+<col style="width: 20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>URI</th>
+<th>GET</th>
+<th>POST</th>
+<th>PUT</th>
+<th>DELETE</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>/sessions</code></td>
+<td><code>N/A</code></td>
+<td>Login.</td>
+<td><code>N/A</code></td>
+<td><code>N/A</code></td>
+</tr>
+<tr class="even">
+<td><code>/sessions/{sessionId}</code></td>
+<td>Returns specific session Info.</td>
+<td><code>N/A</code></td>
+<td>Updates session Info.</td>
+<td>Logout.</td>
+</tr>
+</tbody>
+</table>
 </section>
 <section id="reference-2" class="slide level3">
 <h3>Reference 2</h3>
 <ul>
 <li><a href="https://cloud.google.com/apis/design" class="uri">https://cloud.google.com/apis/design</a></li>
-<li><a href="https://martinfowler.com/articles/richardsonMaturityModel.html" class="uri">https://martinfowler.com/articles/richardsonMaturityModel.html</a></li>
 <li><a href="http://wiki.li3huo.com/Idempotence" class="uri">http://wiki.li3huo.com/Idempotence</a></li>
+<li><a href="https://medium.com/hashmapinc/rest-good-practices-for-api-design-881439796dc9">REST: Good Practices for API Design</a></li>
 </ul>
 </section></section>
     </div>
