@@ -29,12 +29,25 @@
 
 ### GraphQL 一瞥
 
+GraphQL支持的数据操作
+
+![](./graphql.gif)
+
+- 可以与 RESTful API 共存，补足其短板
+- 增加服务复杂度，简单 APIs 不推荐
+
+::: notes
+
+[GraphQL 介绍](https://mp.weixin.qq.com/s/2z8-MUYA2eM0P3nUEREFXA)
+
 - 2018年11月7日，Facebook 将 GraphQL 项目转移到新成立的 GraphQL 基金会（隶属于非营利性的 Linux 基金会）
 - 既是一种用于 API 的查询语言也是一个满足你数据查询的运行时，可以与 RESTful API 共存
 - 请求你所要的数据不多不少
   - 为 API 中的数据提供了一套易于理解的完整描述，使得客户端能够精准获取所需数据，没有任何冗余
 - 获取多个资源只用一个请求
 - 这种查询语言所带来的灵活性和丰富性的同时也增加了复杂性，简单 APIs 有可能不适合这种方式
+
+:::
 
 ### 补足 REST 缺乏对资源进行“部分”和“批量”的处理能力
 
@@ -149,6 +162,12 @@
 - 最佳实践
   - [REST over HTTP/2](https://medium.com/@bimeshde/grpc-vs-rest-performance-simplified-fd35d01bbd4)
   - <img src="rest-over-http2.jpg" alt="Benchmark" height="200">
+
+::: notes
+
+从以上的对比 `并发数和响应` 曲线上看，都使用 HTTP/2 后，响应速度从一个数量级差别缩小到 2 倍左右
+
+:::
 
 ### REST 的不足与争议 3
 
