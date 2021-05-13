@@ -75,6 +75,14 @@
 </section>
 <section id="graphql-一瞥" class="slide level3">
 <h3>GraphQL 一瞥</h3>
+<p>GraphQL支持的数据操作</p>
+<p><img data-src="./graphql.gif" /></p>
+<ul>
+<li>可以与 RESTful API 共存，补足其短板</li>
+<li>增加服务复杂度，简单 APIs 不推荐</li>
+</ul>
+<aside class="notes">
+<p><a href="https://mp.weixin.qq.com/s/2z8-MUYA2eM0P3nUEREFXA">GraphQL 介绍</a></p>
 <ul>
 <li>2018年11月7日，Facebook 将 GraphQL 项目转移到新成立的 GraphQL 基金会（隶属于非营利性的 Linux 基金会）</li>
 <li>既是一种用于 API 的查询语言也是一个满足你数据查询的运行时，可以与 RESTful API 共存</li>
@@ -85,6 +93,7 @@
 <li>获取多个资源只用一个请求</li>
 <li>这种查询语言所带来的灵活性和丰富性的同时也增加了复杂性，简单 APIs 有可能不适合这种方式</li>
 </ul>
+</aside>
 </section>
 <section id="补足-rest-缺乏对资源进行部分和批量的处理能力" class="slide level3">
 <h3>补足 REST 缺乏对资源进行“部分”和“批量”的处理能力</h3>
@@ -310,6 +319,9 @@
 <li><img src="rest-over-http2.jpg" alt="Benchmark" height="200"></li>
 </ul></li>
 </ul>
+<aside class="notes">
+<p>从以上的对比 <code>并发数和响应</code> 曲线上看，都使用 HTTP/2 后，响应速度从一个数量级差别缩小到 2 倍左右</p>
+</aside>
 </section>
 <section id="rest-的不足与争议-3" class="slide level3">
 <h3>REST 的不足与争议 3</h3>
