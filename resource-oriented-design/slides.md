@@ -108,7 +108,7 @@
 - <http://wiki.li3huo.com/Representational_State_Transfer>
 - <http://wiki.li3huo.com/GraphQL>
 
-## REST - 面向资源设计总结
+## RESTful 接口设计须知
 
 ### REST 风格的系统特征
 
@@ -175,11 +175,67 @@
 
 RPC 风格
 
+1. 查询某大夫在指定日期是否有空闲 req
+
+  POST /appointmentService?action=query HTTP/1.1
+
+  {date: "2020-03-04", doctor: "mjones"}
+
+2. 返回大夫的空闲时间 resp
+
+  HTTP/1.1 200 OK
+
+  [
+      {start:"14:00", end: "14:50", doctor: "mjones"},
+      {start:"16:00", end: "16:50", doctor: "mjones"}
+  ]
+
+3. 预约大夫的空闲时间 req
+
+  POST /appointmentService?action=comfirm HTTP/1.1
+
+  {
+      appointment: {date: "2020-03-04", start:"14:00", doctor: "mjones"},
+      patient: {name: xx, age: 30, ……}
+  }
+
+4. 返回预约成功或者失败状态 resp
+
+  HTTP/1.1 200 OK
+
+  {
+      code: 0,
+      message: "Successful confirmation of appointment"
+  }
+
 :::
 
 ### RMM Level 1 引入资源概念
 
 ![RMM Level 1](https://martinfowler.com/articles/images/richardsonMaturityModel/level1.png)
+
+::: notes
+
+1. req
+  POST /doctors/mjones HTTP/1.1
+
+  {date: "2020-03-04"}
+
+2. resp
+
+  HTTP/1.1 200 OK
+
+  [
+      {id: 1234, start:"14:00", end: "14:50", doctor: "mjones"},
+      {id: 5678, start:"16:00", end: "16:50", doctor: "mjones"}
+  ]
+3. req
+
+  POST /schedules/1234 HTTP/1.1
+
+  {name: xx, age: 30, ……}
+
+:::
 
 ### RMM Level 2 引入统一接口
 
@@ -191,19 +247,45 @@ RPC 风格
 
 :::
 
-### RMM Level 3 超文本驱动
+### RMM Level 3 Hypermedia Controls
 
 ![RMM Level 3](https://martinfowler.com/articles/images/richardsonMaturityModel/level3.png)
 
 ::: notes
 
-- Hypermedia Controls：在咱们课程里面的说法是“超文本驱动”，
-- Hypertext as the Engine of Application State（HATEOAS），都说的是同一件事情。
-  - 在 Fielding 论文里
+超文本驱动
+
+- Hypermedia Controls
+- HATEOAS（Hypertext as the Engine of Application State）
+
+1. GET /doctors/mjones/schedule?date=2020-03-04&statu s=open HTTP/1.1
+2. resp
+
+  HTTP/1.1 200 OK
+
+  {
+      schedules：[
+          {
+              id: 1234, start:"14:00", end: "14:50", doctor: "mjones",
+              links: [
+                  {rel: "comfirm schedule", href: "/schedules/1234"}
+              ]
+          },
+          {
+              id: 5678, start:"16:00", end: "16:50", doctor: "mjones",
+              links: [
+                  {rel: "comfirm schedule", href: "/schedules/5678"}
+              ]
+          }
+    ],
+    links: [
+        {rel: "doctor info", href: "/doctors/mjones/info"}
+    ]
+  }
 
 :::
 
-## 服务接口设计实践
+## 面向资源接口设计实践
 
 ### 面向资源的设计
 
@@ -258,6 +340,19 @@ RPC 接口也是可以应用面向资源的设计原则的
 接下来让我们看看怎么把一个接口改造成符合面向资源的设计风格
 
 :::
+
+### 现状 RMM Level 1
+
+- `/portal/auth`  login/check/logout
+- `/portal/user`  chpass
+- `/portal/admin` user 的增删改查，查支持分页
+- `/portal/config` 设置与获取
+- `/portal/favorite` 收藏病例的增删该查(以 series iuid 为主键)
+- `/portal/feedback` 提交反馈意见
+
+### 演进到 RMM Level 2
+
+![](./api-security.jpg)
 
 ### Users Management
 
