@@ -9,8 +9,8 @@
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
-  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/reset.css">
-  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/reveal.css">
+  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/dist/reveal.css">
   <style>
     code{white-space: pre-wrap;}
     span.smallcaps{font-variant: small-caps;}
@@ -20,7 +20,7 @@
     ul.task-list{list-style: none;}
     .display.math{display: block; text-align: center; margin: 0.5rem auto;}
   </style>
-  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/theme/moon.css" id="theme">
+  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/dist/theme/moon.css" id="theme">
 </head>
 <body>
   <div class="reveal">
@@ -65,26 +65,22 @@
 </ul>
 </section></section>
 <section>
-<section id="个人知识管理系统的框架" class="title-slide slide level2">
-<h2>个人知识管理系统的框架</h2>
+<section id="个人知识管理的系统框架" class="title-slide slide level2">
+<h2>个人知识管理的系统框架</h2>
 
 </section>
 <section id="个人知识管理体系分层" class="slide level3">
 <h3>个人知识管理体系分层</h3>
 <figure>
-<img data-src="./pkm.png" alt="知识管理三层结构" /><figcaption aria-hidden="true">知识管理三层结构</figcaption>
+<img data-src="./pkm.jpg" alt="知识管理三层结构" /><figcaption aria-hidden="true">知识管理三层结构</figcaption>
 </figure>
 </section>
-<section id="工作流程的知识体系level-1" class="slide level3">
-<h3>工作流程的知识体系(Level 1)</h3>
+<section id="工作流程level-1" class="slide level3">
+<h3>工作流程(Level 1)</h3>
 <ul>
-<li>基于流程的知识体系框架是最低层次的一种知识体系框架，是另外两种知识体系框架的重要基础</li>
-<li>场景
-<ul>
-<li>影像科后端开发负责人：从需求分析、软件设计到TDD、工程交付等等工作流程</li>
-<li>外部合作项目 VT 的后端工程师：从目标的上下对齐、左右拉通到计划的3W3H等方法</li>
-<li>组件优化项目的后端工程师：Merge Request 的工作方法等等</li>
-</ul></li>
+<li>流程是知识体系基础框架，无流程不专业</li>
+<li>Ray Dalio’s 5 Step Process</li>
+<li><img data-src="./5-step-process.jpg" title="fig:" alt="Ray Dalio’s 5 Step Process" /></li>
 </ul>
 </section>
 <section id="业务领域的专业知识level-2" class="slide level3">
@@ -101,8 +97,8 @@
 </ul></li>
 </ul>
 </section>
-<section id="职业目标的能力知识" class="slide level3">
-<h3>职业目标的能力知识</h3>
+<section id="职业目标的能力知识level-3" class="slide level3">
+<h3>职业目标的能力知识(Level 3)</h3>
 <ul>
 <li>基于职业目标的能力知识体系，是个人层面上最完整的知识体系框架
 <ul>
@@ -154,11 +150,27 @@
 </ul></li>
 </ul>
 </section></section>
-<section id="构建专业岗位所需技能知识的要点" class="title-slide slide level2">
-<h2>构建专业岗位所需技能知识的要点</h2>
+<section>
+<section id="提升专业岗位技能" class="title-slide slide level2">
+<h2>提升专业岗位技能</h2>
 
 </section>
+<section id="业务场景" class="slide level3">
+<h3>业务场景</h3>
+<ul>
+<li>影像科后端开发负责人：从需求分析、软件设计到TDD、工程交付等等工作流程</li>
+<li>外部合作项目 VT 的后端工程师：从目标的上下对齐、左右拉通到计划的3W3H等方法</li>
+<li>组件优化项目的后端工程师：Merge Request 的工作方法等等</li>
+</ul>
+</section></section>
+<section>
+<section id="高效产出目标关键结果" class="title-slide slide level2">
+<h2>高效产出目标关键结果</h2>
 
+</section>
+<section id="从外向内看价值何在" class="slide level3">
+<h3>从外向内看，价值何在</h3>
+</section></section>
 <section>
 <section id="参考文献" class="title-slide slide level2">
 <h2>参考文献</h2>
@@ -223,7 +235,7 @@
     </div>
   </div>
 
-  <script src="https://cdn.li3huo.com/reveal/4.1.0/reveal.js"></script>
+  <script src="https://cdn.li3huo.com/reveal/4.1.0/dist/reveal.js"></script>
 
   // reveal.js plugins
   <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
@@ -235,11 +247,11 @@
       // Full list of configuration options available at:
       // https://revealjs.com/config/
       Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
         // Push each slide change to the browser history
         history: true,
-        // Transition style
-        transition: 'linear', // none/fade/slide/convex/concave/zoom
-        slideNumber: true,
+
         // reveal.js plugins
         plugins: [
           RevealNotes,
