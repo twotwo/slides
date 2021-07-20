@@ -91,23 +91,74 @@
 </aside>
 </section></section>
 <section>
-<section id="微基准测试-pipeline" class="title-slide slide level2">
-<h2>微基准测试 Pipeline</h2>
+<section id="微基准测试-pipeline-实战" class="title-slide slide level2">
+<h2>微基准测试 Pipeline 实战</h2>
 
 </section>
 <section id="pytest-benchmark" class="slide level3">
 <h3>pytest-benchmark</h3>
 <ul>
-<li>引入测试框架</li>
-</ul>
-</section>
-<section id="pytest-benchmark-1" class="slide level3">
-<h3>pytest-benchmark</h3>
+<li>引入测试框架：pytest 简介</li>
+<li>benchmark 设计与编写
 <ul>
-<li>本地集成 Pipeline</li>
+<li>构造用例粒度的测试点</li>
+<li>利用已有的单元测试</li>
+</ul></li>
+<li>统计结果查看
+<ul>
+<li>InterQuartile Range</li>
+<li>Outliers 离群值</li>
+<li>OPS 吞吐率</li>
+<li>Rounds / Iterations 轮 / 次</li>
+</ul></li>
 </ul>
 <aside class="notes">
-
+<p>pytest tests/benchmark/test_api_users.py::test_benchmark2</p>
+<p>1 Standard Deviation from Mean</p>
+<ul>
+<li>一个标准差内 68%</li>
+</ul>
+<p>1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile</p>
+</aside>
+</section>
+<section id="本地集成-pipeline" class="slide level3">
+<h3>本地集成 Pipeline</h3>
+<ul>
+<li><a href="https://docs.gitlab.com/ee/ci/pipelines/">CI/CD pipelines</a>
+<ul>
+<li>pipeline 由 job 和 stage组成：job 定义做什么；stage 定义何时运行 job</li>
+<li>job 被 runner 执行，相同 stage 的 jobs 并行执行，一般来说，当前 stage 的所有 jobs 都执行成功后，进入到下一个 stage</li>
+<li>可视化</li>
+</ul></li>
+<li>The <a href="https://docs.gitlab.com/ee/ci/yaml/gitlab_ci_yaml.html">.gitlab-ci.yml</a> file
+<ul>
+<li><a href="https://docs.gitlab.com/ee/ci/yaml/">Reference</a> Overview</li>
+<li><a href="https://docs.gitlab.com/ee/ci/pipelines/schedules.html">Schedule a Pipeline</a></li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p>stages</p>
+<ul>
+<li>If a job does not specify a stage, the job is assigned the test stage.</li>
+</ul>
+<p>image</p>
+<p>script</p>
+<ul>
+<li>Shell script for the runner to execute</li>
+</ul>
+<p>only / except</p>
+<ul>
+<li>Use <code>only</code> to define when a job runs.</li>
+<li>Use <code>except</code> to define when a job does not run.</li>
+</ul>
+<p>retry</p>
+<ul>
+<li>Use <code>retry</code> to configure how many times a job is retried in case of a failure.</li>
+</ul>
+<p>variables</p>
+<ul>
+<li>CI/CD <code>variables</code> are configurable values that are passed to jobs. They can be set globally and per-job.</li>
+</ul>
 </aside>
 </section>
 <section id="gitlab-runner-执行-pipeline" class="slide level3">
@@ -116,23 +167,21 @@
 <li>本地调试 pipeline
 <ul>
 <li>$ gitlab-runner exec shell build-dev-image</li>
+<li>$ gitlab-runner exec shell unit-test-and-microbenchmarking</li>
 </ul></li>
-<li>用 docker 模式
+<li>用 docker 模式: <code>image: ...</code>
 <ul>
-<li>$ gitlab-runner exec docker unit-test-and-microbenchmarking</li>
+<li>$ gitlab-runner exec docker linters</li>
 </ul></li>
 <li>使用当前用户在后台运行
 <ul>
 <li>$ nohup gitlab-runner run 1&gt; runner.log 2&gt;&amp;1 &amp;</li>
 </ul></li>
 </ul>
-</section>
-<section id="schedule-pipeline" class="slide level3">
-<h3>Schedule Pipeline</h3>
 </section></section>
 <section>
-<section id="最佳实践" class="title-slide slide level2">
-<h2>最佳实践</h2>
+<section id="最佳实践总结" class="title-slide slide level2">
+<h2>最佳实践总结</h2>
 
 </section>
 <section id="用自动化避免重复性工作" class="slide level3">
