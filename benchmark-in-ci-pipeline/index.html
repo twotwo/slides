@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="author" content="liyan">
+  <meta name="dcterms.date" content="2021-07-19">
+  <title>把 Benchmark 集成到 CI Pipeline 中</title>
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/dist/reset.css">
+  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/dist/reveal.css">
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <link rel="stylesheet" href="https://cdn.li3huo.com/reveal/4.1.0/dist/theme/moon.css" id="theme">
+</head>
+<body>
+  <div class="reveal">
+    <div class="slides">
+
+<section id="title-slide">
+  <h1 class="title">把 Benchmark 集成到 CI Pipeline 中</h1>
+  <p class="author">liyan</p>
+  <p class="date">2021-07-19</p>
+</section>
+
+<section>
+<section id="benchmark-概览" class="title-slide slide level2">
+<h2>Benchmark 概览</h2>
+
+</section>
+<section id="软件为什么要进行基准测试呢" class="slide level3">
+<h3>软件为什么要进行基准测试呢？</h3>
+<ul>
+<li>If you cannot measure it, you cannot improve it.
+<ul>
+<li>— Lord Kelvin</li>
+</ul></li>
+<li>性能优化是一个持续改进的过程，如果没有好的措施来看护软件的性能基线，就很容易导致软件系统的性能长期处于不稳定的状态</li>
+<li>基准测试的目的，就是为软件系统获取一个已知的基线水平。这样，当软件修改变化导致性能发生劣化的时候，我们就可以在第一时间发现问题</li>
+</ul>
+<aside class="notes">
+<ul>
+<li>但是，如何对软件系统做好基准测试，是一件非常有挑战的事情！</li>
+<li>就拿 RePACS 服务来说，要对其进行性能测试时，需要模拟很多种类型的用户请求，可是这在测试场景下是很难构造的。</li>
+</ul>
+</aside>
+</section>
+<section id="基准测试的分类" class="slide level3">
+<h3>基准测试的分类</h3>
+<p>按照被测系统规模，可以分为微基准测试与宏基准测试</p>
+<ul>
+<li>微基准测试主要针对的是软件编码实现层面上的性能基线测试</li>
+<li>宏基准测试则是针对产品系统级所开展的性能基线测试</li>
+</ul>
+<aside class="notes">
+<p>微基准测试是对代码执行时间的一项测量活动</p>
+<ul>
+<li>针对较小的代码段运行时间测不准的问题，微基准测试的一种可行方式，就是迭代、累积运行多次后获取的测试时间间隔，然后再平均到每一次的运行时间上，这样就可以减少获取的时间间隔误差对测量结果的影响</li>
+</ul>
+<p>宏基准性能测试</p>
+<ul>
+<li>全系统端到端的性能测试</li>
+<li>组件 / 服务级的性能测试</li>
+<li>在产品服务发布之后，人工进行性能测试</li>
+</ul>
+</aside>
+</section>
+<section id="系统级性能基准测试挑战" class="slide level3">
+<h3>系统级性能基准测试挑战</h3>
+<ol type="1">
+<li>全量系统规模大，不易复制</li>
+<li>引入多机 Cache 机制，仿真业务性能难</li>
+<li>引入安全机制，导致仿真用户难</li>
+<li>业务场景多样分布，测试难复制</li>
+</ol>
+<aside class="notes">
+<p>更高效的做法</p>
+<ul>
+<li>通过软件系统架构分析，将系统级性能基准指标拆分成规模较小的子系统或服务上的性能测试</li>
+<li>然后再通过小规模的性能基准测试结果组合，分析系统级的关键性能，从而实现使用比较低的成本获取更核心的性能指标的目的</li>
+</ul>
+</aside>
+</section></section>
+<section>
+<section id="微基准测试-pipeline" class="title-slide slide level2">
+<h2>微基准测试 Pipeline</h2>
+
+</section>
+<section id="pytest-benchmark" class="slide level3">
+<h3>pytest-benchmark</h3>
+<ul>
+<li>引入测试框架</li>
+</ul>
+</section>
+<section id="pytest-benchmark-1" class="slide level3">
+<h3>pytest-benchmark</h3>
+<ul>
+<li>本地集成 Pipeline</li>
+</ul>
+<aside class="notes">
+
+</aside>
+</section>
+<section id="gitlab-runner-执行-pipeline" class="slide level3">
+<h3>gitlab-runner 执行 Pipeline</h3>
+<ul>
+<li>本地调试 pipeline
+<ul>
+<li>$ gitlab-runner exec shell build-dev-image</li>
+</ul></li>
+<li>用 docker 模式
+<ul>
+<li>$ gitlab-runner exec docker unit-test-and-microbenchmarking</li>
+</ul></li>
+<li>使用当前用户在后台运行
+<ul>
+<li>$ nohup gitlab-runner run 1&gt; runner.log 2&gt;&amp;1 &amp;</li>
+</ul></li>
+</ul>
+</section>
+<section id="schedule-pipeline" class="slide level3">
+<h3>Schedule Pipeline</h3>
+</section></section>
+<section>
+<section id="最佳实践" class="title-slide slide level2">
+<h2>最佳实践</h2>
+
+</section>
+<section id="用自动化避免重复性工作" class="slide level3">
+<h3>用自动化避免重复性工作</h3>
+<ul>
+<li>测试数据准备阶段</li>
+<li>测试环境准备阶段</li>
+<li>测试执行阶段</li>
+<li>测试结果记录阶段</li>
+</ul>
+<aside class="notes">
+<p>测试环境准备阶段</p>
+<ul>
+<li>dev.dockerfile 是目前封装 Pipeline 的基础设施的方式</li>
+<li>docker-compose.yml 封装服务配置</li>
+</ul>
+<p>测试执行阶段</p>
+<ul>
+<li>微基准性能测试直接集成到单元测试阶段，commit 触发</li>
+<li>宏基准性能测试，定义独立的测试阶段，定时触发</li>
+<li>.gitlab-ci.yml 封装执行逻辑</li>
+</ul>
+</aside>
+</section>
+<section id="集成面临的挑战" class="slide level3">
+<h3>集成面临的挑战</h3>
+<ul>
+<li>执行成本</li>
+<li>稳定性要求</li>
+<li>性能结果准确性要求</li>
+</ul>
+<aside class="notes">
+<ul>
+<li><p>性能测试的执行花销是不能忽视的：外部接口都可以 mock</p></li>
+<li><p>需要考虑将性能系统中，软 / 硬件稳定性比较差的依赖项隔离出去</p></li>
+<li><p>避免波动的一些方法：大粒度，重复多次</p></li>
+</ul>
+</aside>
+</section></section>
+    </div>
+  </div>
+
+  <script src="https://cdn.li3huo.com/reveal/4.1.0/dist/reveal.js"></script>
+
+  // reveal.js plugins
+  <script src="https://unpkg.com/reveal.js@^4//plugin/notes/notes.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/search/search.js"></script>
+  <script src="https://unpkg.com/reveal.js@^4//plugin/zoom/zoom.js"></script>
+
+  <script>
+
+      // Full list of configuration options available at:
+      // https://revealjs.com/config/
+      Reveal.initialize({
+        // Display the page number of the current slide
+        slideNumber: true,
+        // Push each slide change to the browser history
+        history: true,
+
+        // reveal.js plugins
+        plugins: [
+          RevealNotes,
+          RevealSearch,
+          RevealZoom
+        ]
+      });
+    </script>
+    </body>
+</html>
