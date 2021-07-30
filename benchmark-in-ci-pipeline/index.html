@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="generator" content="pandoc">
   <meta name="author" content="liyan">
-  <meta name="dcterms.date" content="2021-07-19">
+  <meta name="dcterms.date" content="2021-07-21">
   <title>把 Benchmark 集成到 CI Pipeline 中</title>
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -29,7 +29,7 @@
 <section id="title-slide">
   <h1 class="title">把 Benchmark 集成到 CI Pipeline 中</h1>
   <p class="author">liyan</p>
-  <p class="date">2021-07-19</p>
+  <p class="date">2021-07-21</p>
 </section>
 
 <section>
@@ -37,13 +37,16 @@
 <h2>Benchmark 概览</h2>
 
 </section>
+<section id="what-is-benchmark-in-computing" class="slide level3">
+<h3>What is Benchmark in Computing?</h3>
+<ul>
+<li><code>Benchmark</code> 是指运行一个计算机程序、一组程序或其他操作，以评估一个对象的相对性能的行为。</li>
+<li><a href="https://en.wikipedia.org/wiki/Benchmark_(computing)" class="uri">https://en.wikipedia.org/wiki/Benchmark_(computing)</a></li>
+</ul>
+</section>
 <section id="软件为什么要进行基准测试呢" class="slide level3">
 <h3>软件为什么要进行基准测试呢？</h3>
 <ul>
-<li>If you cannot measure it, you cannot improve it.
-<ul>
-<li>— Lord Kelvin</li>
-</ul></li>
 <li>性能优化是一个持续改进的过程，如果没有好的措施来看护软件的性能基线，就很容易导致软件系统的性能长期处于不稳定的状态</li>
 <li>基准测试的目的，就是为软件系统获取一个已知的基线水平。这样，当软件修改变化导致性能发生劣化的时候，我们就可以在第一时间发现问题</li>
 </ul>
@@ -51,6 +54,26 @@
 <ul>
 <li>但是，如何对软件系统做好基准测试，是一件非常有挑战的事情！</li>
 <li>就拿 RePACS 服务来说，要对其进行性能测试时，需要模拟很多种类型的用户请求，可是这在测试场景下是很难构造的。</li>
+</ul>
+</aside>
+</section>
+<section id="if-you-cannot-measure-it-you-cannot-improve-it" class="slide level3">
+<h3>If you cannot measure it, you cannot improve it</h3>
+<table>
+<thead>
+<tr class="header">
+<th><img data-src="./kelvin.jpg" alt="kelvin" /></th>
+<th>— Lord Kelvin </br></br></th>
+</tr>
+</thead>
+<tbody>
+</tbody>
+</table>
+<aside class="notes">
+<ul>
+<li><a href="https://skeptics.stackexchange.com/questions/42436/did-lord-kelvin-say-if-you-can-not-measure-it-you-can-not-improve-it" class="uri">https://skeptics.stackexchange.com/questions/42436/did-lord-kelvin-say-if-you-can-not-measure-it-you-can-not-improve-it</a></li>
+<li>The actual source is from Antoine-Augustin Cournot, in De l’origine et des limites de la correspondance entre l’algèbre et la géométrie (1847), 375.</li>
+<li><a href="https://www.growthink.com/content/two-most-important-quotes-business" class="uri">https://www.growthink.com/content/two-most-important-quotes-business</a></li>
 </ul>
 </aside>
 </section>
@@ -177,6 +200,37 @@
 <ul>
 <li>$ nohup gitlab-runner run 1&gt; runner.log 2&gt;&amp;1 &amp;</li>
 </ul></li>
+</ul>
+</section></section>
+<section>
+<section id="宏基准测试-pipeline-实战" class="title-slide slide level2">
+<h2>宏基准测试 Pipeline 实战</h2>
+
+</section>
+<section id="编写性能测试用例" class="slide level3">
+<h3>编写性能测试用例</h3>
+<ul>
+<li><a href="https://docs.locust.io/en/stable/quickstart.html#example-locustfile-py">example-locustfile-py</a></li>
+<li>tests/performance/user-locustfile.py</li>
+<li>locust -f tests/performance/user-locustfile.py –users 10 –host http://0.0.0.0:8080 –headless –only-summary –run-time 30m</li>
+</ul>
+</section>
+<section id="监控指标" class="slide level3">
+<h3>监控指标</h3>
+<ul>
+<li>系统资源监控</li>
+<li>内部服务处理结果监控
+<ul>
+<li>埋点: gunicorn_wrapper.py</li>
+<li>统计</li>
+</ul></li>
+</ul>
+</section>
+<section id="集成到-pipeline" class="slide level3">
+<h3>集成到 Pipeline</h3>
+<ul>
+<li>docker-compose.yml</li>
+<li>.gitlab-ci.yml 集成</li>
 </ul>
 </section></section>
 <section>

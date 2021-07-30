@@ -4,10 +4,14 @@
 
 ## Benchmark 概览
 
+### What is Benchmark in Computing?
+
+- `Benchmark` 是指运行一个计算机程序、一组程序或其他操作，以评估一个对象的相对性能的行为。
+- <https://en.wikipedia.org/wiki/Benchmark_(computing)>
+- <https://en.wikipedia.org/wiki/Performance_attribution>
+
 ### 软件为什么要进行基准测试呢？
 
-- If you cannot measure it, you cannot improve it.
-  - —   Lord Kelvin
 - 性能优化是一个持续改进的过程，如果没有好的措施来看护软件的性能基线，就很容易导致软件系统的性能长期处于不稳定的状态
 - 基准测试的目的，就是为软件系统获取一个已知的基线水平。这样，当软件修改变化导致性能发生劣化的时候，我们就可以在第一时间发现问题
 
@@ -15,6 +19,19 @@
 
 - 但是，如何对软件系统做好基准测试，是一件非常有挑战的事情！
 - 就拿 RePACS 服务来说，要对其进行性能测试时，需要模拟很多种类型的用户请求，可是这在测试场景下是很难构造的。
+
+:::
+
+### If you cannot measure it, you cannot improve it
+
+ ![kelvin](./kelvin.jpg) | — Lord Kelvin </br></br>
+--- | ---
+
+::: notes
+
+- <https://skeptics.stackexchange.com/questions/42436/did-lord-kelvin-say-if-you-can-not-measure-it-you-can-not-improve-it>
+- The actual source is from Antoine-Augustin Cournot, in De l’origine et des limites de la correspondance entre l’algèbre et la géométrie (1847), 375.
+- <https://www.growthink.com/content/two-most-important-quotes-business>
 
 :::
 
@@ -134,13 +151,19 @@ variables
 
 - [example-locustfile-py](https://docs.locust.io/en/stable/quickstart.html#example-locustfile-py)
 - tests/performance/user-locustfile.py
-- locust -f tests/performance/user-locustfile.py --users 10 --host http://0.0.0.0:8080 --headless --run-time 30m
+- locust -f tests/performance/user-locustfile.py --users 10 --host http://0.0.0.0:8080 --headless --only-summary --run-time 30m
 
 ### 监控指标
 
 - 系统资源监控
 - 内部服务处理结果监控
   - 埋点: gunicorn_wrapper.py
+  - 统计
+
+### 集成到 Pipeline
+
+- docker-compose.yml
+- .gitlab-ci.yml 集成
 
 ## 最佳实践总结
 
