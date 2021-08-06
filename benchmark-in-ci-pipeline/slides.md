@@ -2,7 +2,34 @@
 % liyan
 % 2021-07-21
 
-## Benchmark 概览
+## CI with Benchmark
+
+### CI 实施回顾
+
+- 阶段一、 每次提交触发完整流水线(快速集成)
+  - 流水线集成实践
+  - 提升构建速度和执行速度的实践
+- 阶段二、每次流水线触发自动测试(质量内建)
+  - linter
+  - unit test
+  - benchmark
+- 阶段三、 出了问题可以第一时间修复(团队形成持续集成文化)
+
+::: notes
+实施 CI 过程的一些最佳实践
+
+- 流水线集成实践(本地 gitlab-runner)
+  - `$ docker-compose -f dc-dev.yml build`
+  - `$ gitlab-runner exec shell <job-name>`
+- 提升构建/执行速度的实践
+  - docker-build-image
+  - Executors: shell 要比 docker 快
+  - 在 shell 中运行 docker-compose run 要比 Docker in docker 模式快
+- 质量内建的实践
+  - ssr/mr/41 Python_Dev_Guide
+  - ssr/mr/42 benchmark
+- 第一时间修复问题
+:::
 
 ### What is Benchmark in Computing?
 
@@ -98,7 +125,7 @@ pytest tests/benchmark/test_api_users.py::test_benchmark2
 
 :::
 
-### 本地集成 Pipeline
+### 本地集成 Pipeline - 知识点
 
 - [CI/CD pipelines](https://docs.gitlab.com/ee/ci/pipelines/)
   - pipeline 由 job 和 stage组成：job 定义做什么；stage 定义何时运行 job
@@ -144,6 +171,39 @@ variables
   - $ gitlab-runner exec docker linters
 - 使用当前用户在后台运行
   - $ nohup gitlab-runner run 1> runner.log 2>&1 &
+
+### Executed only when the pipeline has been scheduled
+
+- Schedule a new pipeline
+  - CI/CD Schedules
+  - 可以手工触发计划任务
+- 仅当配置成计划任务时才触发
+  - `rules:if`
+  - `only:schedules` v11.5
+
+::: notes
+
+`rules:if`
+
+```ymal
+job:on-schedule:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == "schedule"
+  script:
+    - make world
+```
+
+`only:schedules`
+
+```ymal
+job:on-schedule:
+  only:
+    - schedules
+  script:
+    - make world
+```
+
+:::
 
 ## 宏基准测试 Pipeline 实战
 

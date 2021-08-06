@@ -33,15 +33,53 @@
 </section>
 
 <section>
-<section id="benchmark-概览" class="title-slide slide level2">
-<h2>Benchmark 概览</h2>
+<section id="ci-with-benchmark" class="title-slide slide level2">
+<h2>CI with Benchmark</h2>
 
+</section>
+<section id="ci-实施回顾" class="slide level3">
+<h3>CI 实施回顾</h3>
+<ul>
+<li>阶段一、 每次提交触发完整流水线(快速集成)
+<ul>
+<li>流水线集成实践</li>
+<li>提升构建速度的实践</li>
+</ul></li>
+<li>阶段二、每次流水线触发自动测试(质量内建)
+<ul>
+<li>linter</li>
+<li>unit test</li>
+<li>benchmark</li>
+</ul></li>
+<li>阶段三、 出了问题可以第一时间修复(团队形成持续集成文化)</li>
+</ul>
+<aside class="notes">
+<p>实施 CI 过程的一些最佳实践</p>
+<ul>
+<li>流水线集成实践(本地 gitlab-runner)
+<ul>
+<li><code>$ docker-compose -f dc-dev.yml build</code></li>
+<li><code>$ gitlab-runner exec shell &lt;job-name&gt;</code></li>
+</ul></li>
+<li>提升构建速度的实践
+<ul>
+<li>docker-build-image</li>
+</ul></li>
+<li>质量内建的实践
+<ul>
+<li>ssr/mr/41 Python_Dev_Guide</li>
+<li>ssr/mr/42 benchmark</li>
+</ul></li>
+<li>第一时间修复问题</li>
+</ul>
+</aside>
 </section>
 <section id="what-is-benchmark-in-computing" class="slide level3">
 <h3>What is Benchmark in Computing?</h3>
 <ul>
 <li><code>Benchmark</code> 是指运行一个计算机程序、一组程序或其他操作，以评估一个对象的相对性能的行为。</li>
 <li><a href="https://en.wikipedia.org/wiki/Benchmark_(computing)" class="uri">https://en.wikipedia.org/wiki/Benchmark_(computing)</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Performance_attribution" class="uri">https://en.wikipedia.org/wiki/Performance_attribution</a></li>
 </ul>
 </section>
 <section id="软件为什么要进行基准测试呢" class="slide level3">
@@ -144,8 +182,8 @@
 <p>1.5 IQR (InterQuartile Range) from 1st Quartile and 3rd Quartile</p>
 </aside>
 </section>
-<section id="本地集成-pipeline" class="slide level3">
-<h3>本地集成 Pipeline</h3>
+<section id="本地集成-pipeline---知识点" class="slide level3">
+<h3>本地集成 Pipeline - 知识点</h3>
 <ul>
 <li><a href="https://docs.gitlab.com/ee/ci/pipelines/">CI/CD pipelines</a>
 <ul>
@@ -201,6 +239,35 @@
 <li>$ nohup gitlab-runner run 1&gt; runner.log 2&gt;&amp;1 &amp;</li>
 </ul></li>
 </ul>
+</section>
+<section id="executed-only-when-the-pipeline-has-been-scheduled" class="slide level3">
+<h3>Executed only when the pipeline has been scheduled</h3>
+<ul>
+<li>Schedule a new pipeline
+<ul>
+<li>CI/CD Schedules</li>
+<li>可以手工触发计划任务</li>
+</ul></li>
+<li>仅当配置成计划任务时才触发
+<ul>
+<li><code>rules:if</code></li>
+<li><code>only:schedules</code> v11.5</li>
+</ul></li>
+</ul>
+<aside class="notes">
+<p><code>rules:if</code></p>
+<pre class="ymal"><code>job:on-schedule:
+  rules:
+    - if: $CI_PIPELINE_SOURCE == &quot;schedule&quot;
+  script:
+    - make world</code></pre>
+<p><code>only:schedules</code></p>
+<pre class="ymal"><code>job:on-schedule:
+  only:
+    - schedules
+  script:
+    - make world</code></pre>
+</aside>
 </section></section>
 <section>
 <section id="宏基准测试-pipeline-实战" class="title-slide slide level2">
