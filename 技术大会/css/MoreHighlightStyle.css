@@ -1,0 +1,332 @@
+/**
+ * @name: More Highlight Style
+ * @id: obsidian-more-highlight-style
+ * @author: 稻米鼠
+ * @description: Add more highlight styles, but keep the code as readable as possible.
+ * @created: 2024-07-08 20:43:28
+ * @updated: 2024-07-17 16:54:06
+ * @version: 0.0.2
+ */
+/* @settings
+
+name: More Highlight Style
+id: obsidian-more-highlight-style
+settings:
+  -
+    id: buy-me-a-coffee
+    title.en: Buy me a coffee
+    title.zh: 请我喝杯咖啡如何？
+    description.en: '[Have a nice day](https://www.buymeacoffee.com/DaoMouse) and [My Blog](https://zji.me/)'
+    description.zh: '[老鼠爱发电](https://afdian.net/a/daomishu) 以及我的博客: [zji.me](https://zji.me/)'
+    type: info-text
+    markdown: true
+  -
+    id: color-choice-header
+    title.en: Color Choice
+    title.zh: 颜色选择
+    description.en: Setting the highlighter pen color is generally not recommended to be modified. However, if the default color does not match perfectly with the theme you are using, you can try to customize the color yourself.
+    description.zh: 设定荧光笔的颜色，一般不推荐修改。但如果默认颜色和你使用的主题无法完美搭配，可以尝试自行配色。
+    type: heading
+    level: 3
+  -
+    id: mark-highlighter-yellow
+    title.en: Color for yellow highlighter
+    title.zh: 黄色荧光笔
+    type: variable-color
+    opacity: false
+    format: rgb-values
+    default: rgb(255, 233, 88)
+  -
+    id: mark-highlighter-green
+    title.en: Color for green highlighter
+    title.zh: 绿色荧光笔
+    type: variable-color
+    opacity: false
+    format: rgb-values
+    default: rgb(188, 233, 64)
+  -
+    id: mark-highlighter-blue
+    title.en: Color for blue highlighter
+    title.zh: 蓝色荧光笔
+    type: variable-color
+    opacity: false
+    format: rgb-values
+    default: rgb(88, 188, 255)
+  -
+    id: mark-highlighter-pink
+    title.en: Color for pink highlighter
+    title.zh: 粉色荧光笔
+    type: variable-color
+    opacity: false
+    format: rgb-values
+    default: rgb(255, 160, 188)
+  -
+    id: mark-highlighter-orange
+    title.en: Color for orange highlighter
+    title.zh: 橙色荧光笔
+    type: variable-color
+    opacity: false
+    format: rgb-values
+    default: rgb(255, 188, 64)
+  -
+    id: mark-highlighter-red
+    title.en: Color for red highlighter
+    title.zh: 红色荧光笔
+    type: variable-color
+    opacity: false
+    format: rgb-values
+    default: rgb(255, 96, 108)
+  -
+    id: mark-highlighter-purple
+    title.en: Color for purple highlighter
+    title.zh: 紫色荧光笔
+    type: variable-color
+    opacity: false
+    format: rgb-values
+    default: rgb(188, 127, 255)
+  -
+    id: mark-highlighter-gray
+    title.en: Color for gray highlighter
+    title.zh: 灰色荧光笔
+    type: variable-color
+    opacity: false
+    format: rgb-values
+    default: rgb(200, 200, 210)
+  -
+    id: examples-header
+    title.en: Example
+    title.zh: 效果展示
+    type: heading
+    level: 3
+  -
+    id: mark-highlighter-example
+    title.en: Example
+    title.zh: 效果展示
+    description: '<p><mark class="more-highlight yellow-highlighter">黄色荧光笔</mark> · <mark
+  class="more-highlight-half yellow-highlighter">黄色半划线</mark> · <mark
+  class="more-highlight-underline yellow-highlighter">黄色波浪线</mark> · <mark
+  class="more-highlight-rainbow yellow-highlighter">黄色彩虹线</mark> · <mark
+  class="more-highlight-mask yellow-highlighter">黄色模糊</mark></p>
+<p><mark class="more-highlight green-highlighter">绿色荧光笔</mark> · <mark
+  class="more-highlight-half green-highlighter">绿色半划线</mark> · <mark
+  class="more-highlight-underline green-highlighter">绿色波浪线</mark> · <mark
+  class="more-highlight-rainbow green-highlighter">绿色彩虹线</mark> · <mark
+  class="more-highlight-mask green-highlighter">绿色模糊</mark></p>
+<p><mark class="more-highlight blue-highlighter">蓝色荧光笔</mark> · <mark
+  class="more-highlight-half blue-highlighter">蓝色半划线</mark> · <mark
+  class="more-highlight-underline blue-highlighter">蓝色波浪线</mark> · <mark
+  class="more-highlight-rainbow blue-highlighter">蓝色彩虹线</mark> · <mark
+  class="more-highlight-mask blue-highlighter">蓝色模糊</mark></p>
+<p><mark class="more-highlight pink-highlighter">粉色荧光笔</mark> · <mark
+  class="more-highlight-half pink-highlighter">粉色半划线</mark> · <mark
+  class="more-highlight-underline pink-highlighter">粉色波浪线</mark> · <mark
+  class="more-highlight-rainbow pink-highlighter">粉色彩虹线</mark> · <mark
+  class="more-highlight-mask pink-highlighter">粉色模糊</mark></p>
+<p><mark class="more-highlight orange-highlighter">橙色荧光笔</mark> · <mark
+  class="more-highlight-half orange-highlighter">橙色半划线</mark> · <mark
+  class="more-highlight-underline orange-highlighter">橙色波浪线</mark> · <mark
+  class="more-highlight-rainbow orange-highlighter">橙色彩虹线</mark> · <mark
+  class="more-highlight-mask orange-highlighter">橙色模糊</mark></p>
+<p><mark class="more-highlight red-highlighter">红色荧光笔</mark> · <mark
+  class="more-highlight-half red-highlighter">红色半划线</mark> · <mark
+  class="more-highlight-underline red-highlighter">红色波浪线</mark> · <mark
+  class="more-highlight-rainbow red-highlighter">红色彩虹线</mark> · <mark
+  class="more-highlight-mask red-highlighter">红色模糊</mark></p>
+<p><mark class="more-highlight purple-highlighter">紫色荧光笔</mark> · <mark
+  class="more-highlight-half purple-highlighter">紫色半划线</mark> · <mark
+  class="more-highlight-underline purple-highlighter">紫色波浪线</mark> · <mark
+  class="more-highlight-rainbow purple-highlighter">紫色彩虹线</mark> · <mark
+  class="more-highlight-mask purple-highlighter">紫色模糊</mark></p>
+<p><mark class="more-highlight gray-highlighter">灰色荧光笔</mark> · <mark
+  class="more-highlight-half gray-highlighter">灰色半划线</mark> · <mark
+  class="more-highlight-underline gray-highlighter">灰色波浪线</mark> · <mark
+  class="more-highlight-rainbow gray-highlighter">灰色彩虹线</mark> · <mark
+  class="more-highlight-mask gray-highlighter">灰色模糊</mark></p>'
+    type: info-text
+    markdown: true
+  -
+    id: other-settings-header
+    title.en: Other settings
+    title.zh: 其他设置
+    type: heading
+    level: 3
+  -
+    id: half-mark-height
+    title.en: Height of half mark
+    title.zh: 半划线高度
+    type: variable-number-slider
+    default: 8
+    min: 4
+    max: 18
+    step: 1
+    format: px
+  -
+    id: wavy-mark-height
+    title.en: Height of wavy underline
+    title.zh: 波浪下划线的粗细
+    type: variable-number-slider
+    default: 2
+    min: 1
+    max: 4
+    step: 1
+    format: px
+  -
+    id: rainbow-mark-height
+    title.en: Height of rainbow underline
+    title.zh: 彩虹下划线的粗细
+    type: variable-number-slider
+    default: 3
+    min: 1
+    max: 6
+    step: 1
+    format: px
+  -
+    id: mask-mark-height
+    title.en: Height of text blur underline
+    title.zh: 文字模糊下划线的粗细
+    type: variable-number-slider
+    default: 3
+    min: 1
+    max: 6
+    step: 1
+    format: px
+  -
+    id: mask-blur
+    title.en: Level of text blurring
+    title.zh: 文字模糊程度
+    type: variable-number-slider
+    default: 5
+    min: 1
+    max: 12
+    step: 1
+    format: px
+*/
+:root {
+  --mark-highlighter-yellow: 255, 233, 88;
+  --mark-highlighter-green: 188, 233, 64;
+  --mark-highlighter-blue: 88, 188, 255;
+  --mark-highlighter-pink: 255, 160, 188;
+  --mark-highlighter-orange: 255, 188, 64;
+  --mark-highlighter-red: 255, 96, 108;
+  --mark-highlighter-purple: 188, 127, 255;
+  --mark-highlighter-gray: 200, 200, 210;
+  --half-mark-height: 8px;
+  --wavy-mark-height: 2px;
+  --rainbow-mark-height: 3px;
+  --mask-blur: 5px;
+  --mask-mark-height: 3px;
+}
+/* For default */
+/* .cm-s-obsidian span.cm-formatting-highlight,
+.cm-s-obsidian span.cm-highlight,
+.markdown-rendered mark {
+
+} */
+mark.more-highlight {
+  margin: 0 -0.2em;
+  padding: 0.1em 0.2em;
+  border-radius: 0.8em 0.3em;
+  background: transparent;
+  color: var(--text-normal);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background-image: linear-gradient(
+    1deg,
+    rgba(var(--mark-style-color), .1),
+    rgba(var(--mark-style-color), 1) 4%,
+    rgba(var(--mark-style-color), .3) 8%,
+    rgba(var(--mark-style-color), .1) 50%,
+    rgba(var(--mark-style-color), .5) 90%,
+    rgba(var(--mark-style-color), .7) 100%,
+    transparent 100%
+    ),
+    linear-gradient(
+      90deg,
+      transparent  96%,
+    rgba(var(--mark-style-color), 1) 98%,
+    rgba(var(--mark-style-color), 0.8) 100%
+  );
+}
+mark.more-highlight-half {
+  margin: 0 -0.2em;
+  padding: 0 0.2em;
+  background: transparent;
+  color: var(--text-normal);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background: 
+  radial-gradient(farthest-side,rgba(var(--mark-style-color), .8) 98%,#0000) bottom left,
+  linear-gradient(rgb(var(--mark-style-color)) 0 0) bottom,
+  radial-gradient(farthest-side,rgba(var(--mark-style-color), .8) 98%,#0000) bottom right;
+  background-size:var(--half-mark-height) var(--half-mark-height),calc(100% - var(--half-mark-height)) var(--half-mark-height);
+  background-repeat:no-repeat;
+}
+mark.more-highlight-underline {
+  margin: 0 -0.2em;
+  padding: 0 0.2em;
+  background: transparent;
+  color: var(--text-normal);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  text-decoration: underline wavy rgb(var(--mark-style-color)) var(--wavy-mark-height);
+}
+mark.more-highlight-rainbow {
+  margin: 0 -0.2em;
+  padding: 0 0.2em;
+  background: transparent;
+  color: transparent;
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  background: 
+  linear-gradient(90deg, rgb(var(--mark-style-color)), rgb(var(--mark-style-color))),
+  linear-gradient(90deg, rgb(var(--mark-highlighter-red)), rgb(var(--mark-highlighter-yellow)), rgb(var(--mark-highlighter-purple)));
+  background-size: 100% var(--rainbow-mark-height), 0 var(--rainbow-mark-height);
+  background-repeat: no-repeat;
+  background-position: 100% 100%, 0 100%;
+  transition: 0.5s all;
+  cursor: pointer;
+}
+mark.more-highlight-rainbow:hover {
+  color: var(--text-normal);
+  color: var(--text-normal);
+  background-size: 0 var(--rainbow-mark-height), 100% var(--rainbow-mark-height);
+}
+mark.more-highlight-mask {
+  margin: 0 -0.2em;
+  padding: 0 0.2em;
+  background: transparent;
+  color: var(--text-normal);
+  -webkit-box-decoration-break: clone;
+  box-decoration-break: clone;
+  text-decoration: underline solid rgb(var(--mark-style-color)) var(--mask-mark-height);
+  filter: blur(var(--mask-blur));
+  transition: 0.2s all;
+  cursor: pointer;
+}
+mark.more-highlight-mask:hover {
+  filter: blur(0px);
+}
+mark.yellow-highlighter {
+  --mark-style-color: var(--mark-highlighter-yellow);
+}
+mark.green-highlighter {
+  --mark-style-color: var(--mark-highlighter-green);
+}
+mark.blue-highlighter {
+  --mark-style-color: var(--mark-highlighter-blue);
+}
+mark.pink-highlighter {
+  --mark-style-color: var(--mark-highlighter-pink);
+}
+mark.orange-highlighter {
+  --mark-style-color: var(--mark-highlighter-orange);
+}
+mark.red-highlighter {
+  --mark-style-color: var(--mark-highlighter-red);
+}
+mark.purple-highlighter {
+  --mark-style-color: var(--mark-highlighter-purple);
+}
+mark.gray-highlighter {
+  --mark-style-color: var(--mark-highlighter-gray);
+}
