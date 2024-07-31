@@ -11,7 +11,6 @@
     <link rel="stylesheet" href="dist/theme/moon.css" id="theme" />
     <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
     <link rel="stylesheet" href="plugin/customcontrols/style.css">
-    <link rel="stylesheet" href="plugin/chalkboard/style.css">
 
 
     <link rel="stylesheet" href="css/font.css" />
@@ -91,7 +90,7 @@
 
 <body>
     <div class="reveal">
-        <div class="slides"><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" data-background-gradient="linear-gradient(to right, #2C5364, #203A43, #0F2027)" data-background-opacity="1" data-background-image="photos/slides/简笔画-小人儿.svg" -->
+        <div class="slides"><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" data-background-gradient="linear-gradient(to right, #2C5364, #203A43, #0F2027)" data-background-opacity="1" data-background-image="img/简笔画-小人儿.svg" -->
 <div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
 
 <style>
@@ -280,7 +279,7 @@ P8 大模型技能图谱</p>
 
 
 
-# 收获总结
+## 收获总结 <i class="fas fa-book-reader" ></i>
 
 
 
@@ -364,7 +363,7 @@ RAG、Agent
 
 
 
-# 收获总结
+## 收获总结 <i class="fas fa-book-reader" ></i>
 
 
 
@@ -384,7 +383,7 @@ RAG、Agent
 </div>
 <div class="" style="position: absolute; left: 1%; top: 17%; height: 71%; width: 46%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
 
-<img src="content/slides/_template/天鹅.svg" alt="" style="width: 800px; object-fit: fill">
+<img src="img/天鹅.svg" alt="" style="width: 800px; object-fit: fill">
 
 </div>
 
@@ -852,13 +851,13 @@ https://aicon.infoq.cn/2024/beijing/track
 
 <div class="" style="padding: 5; box-sizing: border-box; position: absolute; left: 50%; top: 0%; height: 100%; width: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
 
-<img src="photos/slides/简笔画-小人儿.svg" alt="" style="object-fit: scale-down">
+<img src="img/简笔画-小人儿.svg" alt="" style="object-fit: scale-down">
 
 </div>
 
 <div class="" style="position: absolute; left: 0%; top: 0%; height: 100%; width: 80%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
 
-<img src="static/img/all-in-ob.svg" width="150%" align="center" ></img>
+<img src="img/all-in-ob.svg" width="150%" align="center" ></img>
 
 ## 感谢您的观看！
 
@@ -885,7 +884,6 @@ https://aicon.infoq.cn/2024/beijing/track
     <script src="plugin/chart/chart.min.js"></script>
     <script src="plugin/chart/plugin.js"></script>
     <script src="plugin/customcontrols/plugin.js"></script>
-    <script src="plugin/chalkboard/plugin.js"></script>
 
     <script>
         function extend() {
@@ -940,7 +938,6 @@ https://aicon.infoq.cn/2024/beijing/track
                 RevealMermaid,
                 RevealChart,
                 RevealCustomControls,
-                RevealChalkboard,
             ],
             allottedTime: 120 * 1000,
             mathjax3: {
@@ -958,16 +955,6 @@ https://aicon.infoq.cn/2024/beijing/track
             },
             customcontrols: {
                 controls: [
-                    {
-                        icon: '<i class="fa fa-pen-square"></i>',
-                        title: 'Toggle chalkboard (B)',
-                        action: 'RevealChalkboard.toggleChalkboard();'
-                    },
-                    {
-                        icon: '<i class="fa fa-pen"></i>',
-                        title: 'Toggle notes canvas (C)',
-                        action: 'RevealChalkboard.toggleNotesCanvas();'
-                    },
                 ]
             },
         };
@@ -979,7 +966,7 @@ https://aicon.infoq.cn/2024/beijing/track
         // options from URL query string
         const queryOptions = Reveal().getQueryHash() || {};
 
-        const options = extend(defaultOptions, {"controls":true,"progress":true,"slideNumber":true,"center":true,"transition":"slide","transitionSpeed":"default","width":1280,"height":800,"margin":0.04,"controlsLayout":"edges","loop":false,"showNotes":false}, queryOptions);
+        const options = extend(defaultOptions, {"controls":true,"progress":false,"slideNumber":true,"center":true,"transition":"slide","transitionSpeed":"normal","width":1280,"height":800,"margin":0.04,"controlsLayout":"edges","loop":false,"showNotes":false}, queryOptions);
     </script>
 
     <script>

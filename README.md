@@ -5,4 +5,5 @@
 
 ## 技术大会
 
-[2024北京AICon](./技术大会/2024北京AICon.html)
+- [2024北京AICon](./技术大会/2024北京AICon.html)
+- [2024深圳ArchSummit](./2024深圳ArchSummit.html)
