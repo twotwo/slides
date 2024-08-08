@@ -1,0 +1,890 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <title></title>
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css" />
+    <link rel="stylesheet" href="css/slides-extended.css" />
+    <link rel="stylesheet" href="dist/theme/moon.css" id="theme" />
+    <link rel="stylesheet" href="plugin/highlight/zenburn.css" />
+    <link rel="stylesheet" href="plugin/customcontrols/style.css">
+
+
+    <link rel="stylesheet" href="css/font.css" />
+    <link rel="stylesheet" href="css/MoreHighlightStyle.css" />
+
+    <script defer src="dist/fontawesome/all.min.js"></script>
+
+    <script type="text/javascript">
+        function pageInIframe() {
+            return (window.location !== window.parent.location);
+        }
+
+        let forgetPop = true;
+        function onPopState(event) {
+            if(forgetPop){
+                forgetPop = false;
+            } else if( pageInIframe()) {
+                parent.postMessage(event.target.location.href, "app://obsidian.md");
+            }
+        }
+        window.onpopstate = onPopState;
+        window.onmessage = event => {
+            if(event.data == "reload"){
+                window.document.location.reload();
+            }
+            forgetPop = true;
+        }
+
+        function fitElements() {
+            const itemsToFit = document.getElementsByClassName('fitText');
+            for (const item in itemsToFit) {
+                if (Object.hasOwnProperty.call(itemsToFit, item)) {
+                    const element = itemsToFit[item];
+                    fitElement(element, 1, 1000);
+                    element.classList.remove('fitText');
+                }
+            }
+        }
+
+        function fitElement(element, start, end) {
+
+            let size = (end + start) / 2;
+            element.style.fontSize = `${size}px`;
+
+            if (Math.abs(start - end) < 1) {
+                while (element.scrollHeight > element.offsetHeight) {
+                    size--;
+                    element.style.fontSize = `${size}px`;
+                }
+                return;
+            }
+
+            if (element.scrollHeight > element.offsetHeight) {
+                fitElement(element, start, size);
+            } else {
+                fitElement(element, size, end);
+            }
+        }
+
+
+        document.onreadystatechange = () => {
+            fitElements();
+            if (document.readyState === 'complete') {
+                if (pageInIframe() && window.location.href.indexOf("?export") != -1){
+                    parent.postMessage(event.target.location.href, "app://obsidian.md");
+                }
+                if (window.location.href.indexOf("print-pdf") != -1){
+                    let stateCheck = setInterval(() => {
+                        clearInterval(stateCheck);
+                        window.print();
+                    }, 250);
+                }
+            }
+        };
+    </script>
+</head>
+
+<body>
+    <div class="reveal">
+        <div class="slides"><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" data-background-gradient="linear-gradient(to right, #2C5364, #203A43, #0F2027)" data-background-opacity="1" data-background-image="img/简笔画-小人儿.svg" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<style>
+#title {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 10px;
+    border-radius: 8;
+    border-color: rgba(32, 58, 67, 0.5);
+    color: rgb(255, 255, 255);
+    text-align: left;
+    margin: auto;
+    font-family: "Microsoft YaHei";
+}
+
+#subtitle {
+	color:#e6fcf5;
+	font-style: italic; /* 设置文本为斜体 */
+	font-weight: bold; /* 设置文本为粗体 */
+	font-family: "LXGW WenKai Screen", "Microsoft YaHei";
+}
+
+#date {
+	font-family:'Nanum Pen Script'; 
+	font-size:1.8em;
+	color:#616161;
+	vertical-align:top;
+	font-weight:400;
+}
+
+</style>
+<!-- CSS 设置结束 -->
+
+
+<div class="" style="position: absolute; left: 0%; top: 30%; height: 40%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" id="title">
+
+<div class="block">
+
+全球软件开发大会 2024 | 全面进化
+</div>
+
+<!-- .element: id="subtitle" -->
+
+<div class="block">
+
+# QCon 北京 2024
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+01 | _**技术进展跟踪**_ | InfoQ QCon
+
+
+
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 60%; height: 40%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<div class="block">
+
+<i class="fab fa-github" ></i>  *@twotwo*
+</div>
+
+
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 70%; height: 40%; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center" id="date">
+
+<div class="block">
+
+2024-08
+</div>
+
+
+
+</div>
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## 1 个主论坛 + 28 个[专题论坛](https://qcon.infoq.cn/2024/beijing) 4/11~4/13
+
+<split  gap="5">
+
+D1
+
+D2上午
+
+D2下午
+
+</split>
+
+<split left="1" right="1">
+
+1. [主题演讲](https://qcon.infoq.cn/2024/beijing/track/1678) 上午
+2. [单体 vs 微服务](https://qcon.infoq.cn/2024/beijing/track/1621)
+3. [AI Agent 智能体落地](https://qcon.infoq.cn/2024/beijing/track/1633)
+4. [LLM应用产品设计](https://qcon.infoq.cn/2024/beijing/track/1618)
+5. [数据库与大数据融合](https://qcon.infoq.cn/2024/beijing/track/1635)
+6. [高效能团队管理](https://qcon.infoq.cn/2024/beijing/track/1630)
+7. [AI 云原生语言生态](https://qcon.infoq.cn/2024/beijing/track/1624)
+8. [鸿蒙应用开发](https://qcon.infoq.cn/2024/beijing/track/1698)
+
+- [业务可观测](https://qcon.infoq.cn/2024/beijing/track/1622)
+- [LLM应用场景](https://qcon.infoq.cn/2024/beijing/track/1628)
+- [LLM产品设计](https://qcon.infoq.cn/2024/beijing/track/1618)
+- [LLM数据安全](https://qcon.infoq.cn/2024/beijing/track/1673)
+- [自研OS大终端](https://qcon.infoq.cn/2024/beijing/track/1617)
+- [组织架构进化和流程重塑](https://qcon.infoq.cn/2024/beijing/track/1679)
+- [分布式云计算与LLM](https://qcon.infoq.cn/2024/beijing/track/1695)
+- [AI 时代下向量数据库与云安全](https://qcon.infoq.cn/2024/beijing/track/1697)
+
+1. [RAG与向量数据库](https://qcon.infoq.cn/2024/beijing/track/1672)
+2. __
+3. [下一代生产力工具](https://qcon.infoq.cn/2024/beijing/track/1620)
+4. [LLM训练和推理工程](https://qcon.infoq.cn/2024/beijing/track/1655)
+5. [HarmonyOS](https://qcon.infoq.cn/2024/beijing/track/1699)
+6. [开源产品的商业闭环](https://qcon.infoq.cn/2024/beijing/track/1623)
+
+</split>
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+D3
+
+<split  gap="5">
+
+1. [智能运维大模型](https://qcon.infoq.cn/2024/beijing/track/1627)
+2. [LLM数据工程和对齐](https://qcon.infoq.cn/2024/beijing/track/1654)
+3. [数据治理](https://qcon.infoq.cn/2024/beijing/track/1625)
+4. [效能工程](https://qcon.infoq.cn/2024/beijing/track/1629)
+5. [大前端](https://qcon.infoq.cn/2024/beijing/track/1626)
+
+- [高质量架构](https://qcon.infoq.cn/2024/beijing/track/1619)
+- [性能优化](https://qcon.infoq.cn/2024/beijing/track/1632)
+- [AI 存储加速](https://qcon.infoq.cn/2024/beijing/track/1634)
+- __
+- __
+
+</split>
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<style>
+#outline {
+	color:#e6fcf5;
+	font-family: "LXGW WenKai Screen", "Microsoft YaHei";
+}
+#outline a { color: #81d8cf; }
+
+</style>
+<!-- CSS 设置结束 -->
+<div class="" style="position: absolute; left: 0%; top: 5%; height: 10%; width: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-evenly" align="left">
+
+
+
+## 全面进化的软件开发生态
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="has-light-background" style="background-color: rgba(132, 190, 240, 0.9); position: absolute; left: 0%; top: 0%; height: 100%; width: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center" id="outline">
+
+<div class="block">
+
+### <mark class="more-highlight-half orange-highlighter">产品与市场</mark>
+- 主题讲演
+- [开源产品的商业闭环](https://qcon.infoq.cn/2024/beijing/track/1623)
+- [LLM应用场景](https://qcon.infoq.cn/2024/beijing/track/1628)
+- [LLM产品设计](https://qcon.infoq.cn/2024/beijing/track/1618)
+- [智能体落地](https://qcon.infoq.cn/2024/beijing/track/1633)
+
+</div>
+
+
+</div>
+
+<div class="has-light-background" style="background-color: rgba(111, 179, 238, 0.9); position: absolute; left: 25%; top: 0%; height: 100%; width: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center" id="outline">
+
+<div class="block">
+
+### 架构与关键技术
+- [单体vs微服务](https://qcon.infoq.cn/2024/beijing/track/1621)
+- [高质量架构](https://qcon.infoq.cn/2024/beijing/track/1619)
+- <mark class="more-highlight green-highlighter">[RAG 与向量数据库](https://qcon.infoq.cn/2024/beijing/track/1672)</mark><!-- .element: style="font-size: 32px" -->
+- <mark class="more-highlight red-highlighter">[数据工程和对齐](https://qcon.infoq.cn/2024/beijing/track/1654)</mask>
+
+
+</div>
+
+
+</div>
+
+<div class="has-light-background" style="background-color: rgba(91, 168, 236, 0.9); position: absolute; left: 50%; top: 0%; height: 100%; width: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center" id="outline">
+
+<div class="block">
+
+### 效能与性能
+- [云原生语言生态](https://qcon.infoq.cn/2024/beijing/track/1624)
+- <mark class="more-highlight-half orange-highlighter">[训练和推理工程](https://qcon.infoq.cn/2024/beijing/track/1655)</mark>
+- [效能工程](https://qcon.infoq.cn/2024/beijing/track/1629)
+- [生产力工具](https://qcon.infoq.cn/2024/beijing/track/1620)
+- [性能优化](https://qcon.infoq.cn/2024/beijing/track/1632)
+- [存储加速](https://qcon.infoq.cn/2024/beijing/track/1634)
+
+</div>
+
+
+
+</div>
+
+<div class="has-light-background" style="background-color: rgba(70, 157, 233, 0.9); position: absolute; left: 75%; top: 0%; height: 100%; width: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center" id="outline">
+
+<div class="block">
+
+### 服务运维
+- <mark class="more-highlight-half orange-highlighter">[智能运维大模型](https://qcon.infoq.cn/2024/beijing/track/1627)</mark>
+- [业务可观测](https://qcon.infoq.cn/2024/beijing/track/1622)
+- <mark class="more-highlight-half orange-highlighter">[云计算与大模型](https://qcon.infoq.cn/2024/beijing/track/1695)</mark>
+- [LLM数据安全](https://qcon.infoq.cn/2024/beijing/track/1673)
+- <!-- .element: style="font-size: 36px" -->
+
+</div>
+
+
+ 
+</div>
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<style>
+#outline {
+	color:#e6fcf5;
+	font-family: "LXGW WenKai Screen", "Microsoft YaHei";
+}
+.horizontal_dotted_line {
+  border-bottom: 2px dotted gray;
+}
+</style>
+<!-- CSS 设置结束
+<div class="" style="position: absolute; left: 0%; top: 5%; height: 10%; width: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-evenly" align="left">
+
+
+
+## 收获总结 <i class="fas fa-book-reader" ></i>
+
+
+
+
+
+
+
+
+
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 0%; height: 100%; width: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center" id="outline">
+
+<div class="block">
+
+<mark class="more-highlight orange-highlighter">总体结构</mark>
+
+近 30 个专题，按产品生命周期分成了 4 类
+</div>
+
+
+</div>
+
+<div class="has-light-background" style="background-color: rgba(111, 179, 238, 0.9); position: absolute; left: 25%; top: 0%; height: 100%; width: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center" id="outline">
+
+<div class="block">
+
+<mark class="more-highlight pink-highlighter">产品与市场</mark>
+
+开源产品商业化 / PMF 探索
+</div>
+
+
+</div>
+
+<div class="has-light-background" style="background-color: rgba(91, 168, 236, 0.9); position: absolute; left: 50%; top: 0%; height: 100%; width: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center" id="outline">
+
+<div class="block">
+
+<mark class="more-highlight green-highlighter">架构与关键技术</mark>
+
+向量数据库：[MyScale](https://myscale.com/) / [DingoDB](https://github.com/dingodb/) 
+</div>
+
+
+<div class="block">
+
+<mark class="more-highlight green-highlighter">架构与关键技术</mark>
+
+向量数据库：[MyScale](https://myscale.com/) / [DingoDB](https://github.com/dingodb/) 
+</div>
+
+
+
+</div>
+
+<div class="has-light-background" style="background-color: rgba(70, 157, 233, 0.9); position: absolute; left: 75%; top: 0%; height: 100%; width: 25%; display: flex; flex-direction: column; align-items: center; justify-content: center" id="outline">
+
+<div class="block">
+
+<mark class="more-highlight yellow-highlighter">基础设施与运维</mark>
+
+基于大模型的运维方案
+</div>
+
+
+<div class="block">
+
+<mark class="more-highlight yellow-highlighter">基础设施与运维</mark>
+
+基于大模型的运维方案
+</div>
+
+
+
+</div>
+ -->
+
+<div class="" style="padding: 0 20px; box-sizing: border-box; position: absolute; left: 0%; top: 0%; height: 10%; width: 100%; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-evenly" align="left">
+
+
+
+## 收获总结 <i class="fas fa-book-reader" ></i>
+
+
+
+
+
+
+
+
+
+
+</div>
+<div class="horizontal_dotted_line" style="position: absolute; left: 3%; top: 11%; height: 0%; width: 94%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+</div>
+
+<div class="" style="border-radius: 15px; position: absolute; left: 0%; top: 15%; height: 75%; width: 48%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+</div>
+<div class="" style="position: absolute; left: 1%; top: 17%; height: 71%; width: 46%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="img/天鹅.svg" alt="" style="width: 800px; object-fit: fill">
+
+</div>
+
+<div class="" style="position: absolute; left: 36%; top: 15%; height: 19%; width: 63%; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-evenly" align="left">
+
+<div class="block">
+
+<mark class="more-highlight orange-highlighter">总体结构</mark>
+
+近 30 个专题，按产品生命周期分成了 4 类
+</div>
+
+
+</div>
+<div class="" style="position: absolute; left: 45%; top: 35%; height: 19%; width: 54%; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-evenly" align="left">
+
+<div class="block">
+
+<mark class="more-highlight pink-highlighter">产品与市场</mark>
+
+开源产品商业化 / PMF 探索
+</div>
+
+
+</div>
+<div class="" style="position: absolute; left: 45%; top: 55%; height: 19%; width: 54%; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-evenly" align="left">
+
+<div class="block">
+
+<mark class="more-highlight green-highlighter">架构与关键技术</mark>
+
+向量数据库：[MyScale](https://myscale.com/) / [DingoDB](https://github.com/dingodb/) 
+</div>
+
+
+</div>
+<div class="" style="position: absolute; left: 40%; top: 75%; height: 19%; width: 44%; display: flex; flex-direction: column; align-items: flex-start; justify-content: space-evenly" align="left">
+
+<div class="block">
+
+<mark class="more-highlight yellow-highlighter">基础设施与运维</mark>
+
+基于大模型的运维方案
+</div>
+
+
+</div>
+
+
+<!-- http://xhslink.com/xS1w1P -->
+</div>
+
+<aside class="notes"><p>趋势分析：四层结构</p>
+<ol>
+<li>基础设施层：算力、数据</li>
+<li>模型层：LLM、多模态</li>
+<li>中间层：微调、提示工程、RAG、Agent</li>
+<li>应用层</li>
+</ol>
+</aside></script></section></section><section  data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# 0. [主题演讲](https://qcon.infoq.cn/2024/beijing/track/1678)
+
+1. 姜昕蔚 [中国生成式 AI 开发者洞察 2024](obsidian://open?vault=slides&file=%E4%B8%AD%E5%9B%BD%E7%94%9F%E6%88%90%E5%BC%8F%20AI%20%E5%BC%80%E5%8F%91%E8%80%85%E6%B4%9E%E5%AF%9F%202024)
+	- AGI 复合年增长率预计超过 40%
+2. 韦青 [看不见的大猩猩](obsidian://open?vault=slides&file=%E7%9C%8B%E4%B8%8D%E8%A7%81%E7%9A%84%E5%A4%A7%E7%8C%A9%E7%8C%A9) ⭐️
+	- 🦍 明显但需要长期投入才能解决问题的方案
+	- 企业如何在信息过载时代保持清醒的认知和决策能力
+
+3. 郭东白 [大模型时代的架构思维](obsidian://open?vault=slides&file=202404-bj-qcon-arch#%E5%A4%A7%E6%A8%A1%E5%9E%8B%E6%97%B6%E4%BB%A3%E7%9A%84%E6%9E%B6%E6%9E%84%E6%80%9D%E7%BB%B4)
+	- 从原子价值单元开始对大模型做投入
+4. 圆桌对话：数据智能新趋势
+	- https://time.geekbang.org/course/detail/100759901-767406
+</div>
+
+<aside class="notes"><ol>
+<li><a href="#/1/2">中国AGI洞察</a></li>
+<li><a href="obsidian://open?vault=slides&file=%E7%9C%8B%E4%B8%8D%E8%A7%81%E7%9A%84%E5%A4%A7%E7%8C%A9%E7%8C%A9">看不见的大猩猩</a></li>
+<li>[郭东白]</li>
+</ol>
+</aside></script></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# 1. 产品与市场
+### 1.1 开源产品商业化
+### 1.2 大模型应用场景探索
+### 1.3 大模型应用产品设计
+### 1.4 Agent 落地
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## 1.1 [开源产品商业化](https://qcon.infoq.cn/2024/beijing/track/1623)
+
+1. [Greptime的商业开源求索之路](https://qcon.infoq.cn/2024/beijing/presentation/5766) 一款时序数据库
+	- 如何利用开源项目 GreptimeDB 来构建商业闭环
+	- 应在 API 和产品核心体验上保持开源，并与商业产品持平
+2. [EMQ 开源商业化](https://qcon.infoq.cn/2024/beijing/presentation/5937) MQTT 消息服务
+	- 商业服务模式包括无服务器、全管理和自助云服务
+3. [JuiceFS 的商业与开源实践](https://qcon.infoq.cn/2024/beijing/presentation/5705) 
+	- https://juicefs.com/docs/zh/community/introduction
+	- https://time.geekbang.org/course/detail/100759901-767533
+4. [云时代下开源技术商业化思考](https://qcon.infoq.cn/2024/beijing/presentation/5774)
+	- https://blog.csdn.net/kaiyuanshe/article/details/140114484
+5. [TiDB 开源与国际化的融合](https://qcon.infoq.cn/2024/beijing/presentation/5717)
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## 1.2 [大模型应用场景探索](https://qcon.infoq.cn/2024/beijing/track/1628)
+
+[京东商家智能助手](https://qcon.infoq.cn/2024/beijing/presentation/5849) Agent 🚫
+
+[RAG 商业落地实践踩坑](https://qcon.infoq.cn/2024/beijing/presentation/5939)⭐️ 高原 句子互动 CTO
+- AI 对话系统(专家级营养师)的商业落地
+
+[饿了么垂域大模型 EGPT 训练与 C 端应用实践](https://qcon.infoq.cn/2024/beijing/presentation/5844) 方之家
+- 垂域大模型在C端搜索场景的训练与使用
+
+[大模型技术在快手搜索的应用](https://qcon.infoq.cn/2024/beijing/presentation/5751) 许坤
+
+4.1 智能运维大模型：在运维中应用大模型
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## 1.3 [大模型应用的产品设计](https://qcon.infoq.cn/2024/beijing/track/1618)
+
+[金山云：轻舟智问](https://qcon.infoq.cn/2024/beijing/presentation/5808) 陈海彪 知识库+LLM=知识助手
+
+[大模型应用开发新范式](https://qcon.infoq.cn/2024/beijing/presentation/5882) 娄双双 百度智能云 千帆AppBuilder
+
+[通义灵码，AI 原生开发新范式](https://qcon.infoq.cn/2024/beijing/presentation/5710) 陈鑫（神秀）阿里云 不知所云:(
+
+[MFTcoder：大模型多任务微调框架](https://qcon.infoq.cn/2024/beijing/presentation/5863) 余航 蚂蚁集团 设计图生成网页
+- https://codefuse.alipay.com/
+- https://github.com/codefuse-ai
+- https://huggingface.co/codefuse-ai
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## 1.4 [AI Agent 智能体落地](https://qcon.infoq.cn/2024/beijing/track/1633)
+
+[AI Agent 在企业经营分析场景的落地](https://qcon.infoq.cn/2024/beijing/presentation/5706) 李飞 数势科技
+- Agent 结合指标平台、LLM，提升数据分析效率和准确性
+
+[办公自动化 AI Agent 分享](https://qcon.infoq.cn/2024/beijing/presentation/5729) 欧阳小刚 实在智能
+</div></script></section></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# 2. 架构与关键技术
+
+### 1. 架构
+### [2. RAG 与向量数据库](#/3/2)
+
+### 3. 数据工程和对齐
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## 2.1 架构
+## 架构
+[202404-bj-qcon-arch](obsidian://open?vault=slides&file=202404-bj-qcon-arch)
+1. 主题演讲-大模型时代的架构思维
+2. 高质量架构-架构治理与合理性度量
+3. 饿了么微服务精简归拢实践
+4. 字节跳动微服务合并编译实践
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## 2.2 [RAG 与向量数据库](https://qcon.infoq.cn/2024/beijing/track/1672)
+[向量数据库与生成式AI的实战洞察](https://qcon.infoq.cn/2024/beijing/presentation/5909)⭐️ 诸葛瑞麟 伊克罗德信息
+
+[基于多模态智能引擎的大模型知识库技术应用](https://qcon.infoq.cn/2024/beijing/presentation/5737) 张红兵 Fabarta
+
+[Al 原生数据库 Infinity 系统架构与 RAG 技术实践](https://qcon.infoq.cn/2024/beijing/presentation/5755) ⭐️ 张颖峰 英飞流
+
+[DingoDB：从 HSAP 到多模向量数据库的技术演进之路](https://qcon.infoq.cn/2024/beijing/presentation/5778) 孟圣智
+
+[2024 年向量数据库与 RAG 落地思考与实践](https://qcon.infoq.cn/2024/beijing/presentation/5940) ⭐️ 苏鹏 爱可生
+
+4.2 云计算与 LLM
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### 诸葛瑞麟的 RAG 实战案例
+如何利用向量数据库与生成式 AI 结合的 RAG 系统提升数据潜能，并分享了实战案例。
+
+RAG 仍然是落地大模型应用的最优路径
+
+MyScale：开源的 AI 向量数据库
+- https://myscale.github.io/benchmark/
+
+案例：智问 1.0 和 2.0
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### Al 原生数据库 Infinity 系统架构与 RAG 技术实践
+
+RAG（Retrieval-Augmented Generation）技术现状及发展趋势
+
+AI 原生数据库 Infinity 的系统架构
+
+Infinity 与 RAGFlow 结合的应用实践
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### 基于 DingoDB 的 RAG 实践
+DingoDB 是一个从 HSAP（Highly Scalable Analytical Processing）发展而来的多模向量数据库，它在 AGI（Artificial General Intelligence）时代提供了一种新型的数据架构
+
+DingoDB 既具备关系数据库的特性，如支持 SQL 和事务，又支持向量数据库的功能，如 Python 和 Java SDK，能够无缝对接 LLM（Large Language Model）应用
+- https://github.com/dingodb/dingo
+- https://github.com/dingodb/dingo-store
+- https://www.dingodb.com/
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+### 微调与检索增强生成技术对比
+<mark class="more-highlight red-highlighter">微调方式进行知识注入，存在两个缺陷</mark>
+1. 模型微调需要专业人才、GPU设备投入较大  
+2. 微调(非私有化部署)有数据泄漏的风险，而且知识不易变更
+
+<mark class="more-highlight green-highlighter">检索增强生成(RAG)的方式</mark>
+- 定位到最新且准确的知识数据，作为上下文输送给大模型
+- 用低成本(仅普通服务器即可实现高效检索)的方式提升模型效果
+
+<mark class="more-highlight blue-highlighter">技术重点：信息提取 / 信息检索/ LLM 交互/ RAG评估</mark>
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## 2.3 [大模型数据工程和对齐](https://qcon.infoq.cn/2024/beijing/track/1654)
+
+[Safe RLHF 的挑战与蚁鉴的应对之策](https://qcon.infoq.cn/2024/beijing/presentation/5837) 🚫 三笛 蚂蚁集团
+
+[快意大模型在短视频互动场景的应用探索](https://qcon.infoq.cn/2024/beijing/presentation/5763) 刘澈 快手
+- 快意大模型
+
+[海天瑞声在大模型数据的探索与实践](https://qcon.infoq.cn/2024/beijing/presentation/5899) 黄宇凯 自动驾驶
+- 数据应用在大模型研发的四个阶段
+	- Pretrain/ SFT/ Align/ Evaluation
+</div></script></section></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# 3. 效能与性能
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## 3.1 大模型工程化
+[类 Sora 开源架构模型训练实践](https://qcon.infoq.cn/2024/beijing/presentation/5846) 
+- 一个开源的视频生成模型，旨在复制 OpenAI 的 Sora 模型的功能
+- 对模型架构、训练过程、数据预处理和性能进行了介绍
+
+[超大规模集群下大语言模型训练的最佳实践](https://qcon.infoq.cn/2024/beijing/presentation/5848) 刘育良 快手
+- LLM 训练的规模、数据量、计算量以及相应的技术挑战和解决方案
+
+万字综述大模型高效推理 [LLM Eff-Inference](https://baijiahao.baidu.com/s?id=1801802091122054888)
+- 推理效率瓶颈分析以及数据层、模型层和系统层的优化技术
+
+[NVIDIA GPU 架构下的 FP8 训练与推理](https://developer.nvidia.com/zh-cn/blog/nvidia-gpu-fp8-training-inference/)
+- 利用 E5M2/E4M3 格式，具备与 FP16 相当的动态范围
+</div></script></section></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# 4. 基础设施与服务运维
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## 4.1 [智能运维大模型](https://qcon.infoq.cn/2024/beijing/track/1627)
+[202404-bj-qcon-topics#运维](obsidian://open?vault=slides&file=202404-bj-qcon-topics#%E8%BF%90%E7%BB%B4)
+1. 字节的 LLM 智能运维架构 SRE-Copilot
+2. 华为云的 LLM 和 Multi-Agent 协同的运维方案
+3. 阿里云的基于检索和工具增强的智能运维
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+## 4.2 云计算与LLM
+
+[分布式云计算与 AI 大模型智能化应用实践](https://qcon.infoq.cn/2024/beijing/track/1695)
+
+1. 吴琼 Akamai 售前及运维工程师
+	- [Akamai](akamai.com) 产品介绍
+	- 案例讲解
+1. 郑如鹏 MongoDB 解决方案架构师
+	- MongoDB Atlas 数据平台支持开发者构建 AI 智能化应用
+	- 向量搜索技术应用
+</div></script></section></section><section ><section data-markdown><script type="text/template"><!-- .slide: class="drop" template="" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+# Reference
+
+
+
+
+<div class="footnotes" role="doc-endnotes">
+<ol>
+<li id="fn:schedule" role="doc-endnote" class="footnote"><p>
+
+https://qcon.infoq.cn/2024/beijing/schedule
+
+</p></li><li id="fn:keynote" role="doc-endnote" class="footnote"><p>
+
+https://qcon.infoq.cn/2024/beijing/track/1678
+
+</p></li></ol>
+</div>
+</div></script></section><section data-markdown><script type="text/template"><!-- .slide: class="drop" data-background-gradient="radial-gradient(circle at top right, #2C5364, #203A43, #0F2027)" data-background-opacity="0.2" -->
+<div class="" style="position: absolute; left: 0px; top: 0px; height: 800px; width: 1280px; min-height: 800px; display: flex; flex-direction: column; align-items: center; justify-content: center" absolute="true">
+
+<div class="" style="padding: 5; box-sizing: border-box; position: absolute; left: 50%; top: 0%; height: 100%; width: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="img/简笔画-小人儿.svg" alt="" style="object-fit: scale-down">
+
+</div>
+
+<div class="" style="position: absolute; left: 0%; top: 0%; height: 100%; width: 80%; display: flex; flex-direction: column; align-items: center; justify-content: center" >
+
+<img src="img/all-in-ob.svg" width="150%" align="center" ></img>
+
+## 感谢您的观看！
+
+不要忘了一键三连噢～🩷 ⭐️ 📝
+</div>
+</div>
+
+<aside class="notes"><ol>
+<li>还有更多内容，请关注 all in obsidian 账号后查看；</li>
+<li>喜欢这篇笔记，请点赞、收藏、评论 三连；</li>
+<li>感谢您的观看！</li>
+</ol>
+</aside></script></section></section></div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+
+    <script src="plugin/zoom/zoom.js"></script>
+    <script src="plugin/math/math.js"></script>
+    <script src="plugin/mermaid/mermaid.js"></script>
+    <script src="plugin/chart/chart.min.js"></script>
+    <script src="plugin/chart/plugin.js"></script>
+    <script src="plugin/customcontrols/plugin.js"></script>
+
+    <script>
+        function extend() {
+            const target = {};
+            for (let i = 0; i < arguments.length; i++) {
+                const source = arguments[i];
+                for (const key in source) {
+                    if (source.hasOwnProperty(key)) {
+                        target[key] = source[key];
+                    }
+                }
+            }
+            return target;
+        }
+
+        function isLight(color) {
+            let hex = color.replace('#', '');
+
+            // convert #fff => #ffffff
+            if (hex.length == 3) {
+                hex = `${hex[0]}${hex[0]}${hex[1]}${hex[1]}${hex[2]}${hex[2]}`;
+            }
+
+            const c_r = parseInt(hex.substr(0, 2), 16);
+            const c_g = parseInt(hex.substr(2, 2), 16);
+            const c_b = parseInt(hex.substr(4, 2), 16);
+            const brightness = ((c_r * 299) + (c_g * 587) + (c_b * 114)) / 1000;
+            return brightness > 155;
+        }
+
+        const bgColor = getComputedStyle(document.documentElement).getPropertyValue('--r-background-color').trim();
+
+        if (isLight(bgColor)) {
+            document.body.classList.add('has-light-background');
+        } else {
+            document.body.classList.add('has-dark-background');
+        }
+
+        // default options to init reveal.js
+        const defaultOptions = {
+            controls: true,
+            progress: true,
+            history: true,
+            center: true,
+            transition: 'default', // none/fade/slide/convex/concave/zoom
+            plugins: [
+                RevealMarkdown,
+                RevealHighlight,
+                RevealZoom,
+                RevealNotes,
+                RevealMath.MathJax3,
+                RevealMermaid,
+                RevealChart,
+                RevealCustomControls,
+            ],
+            allottedTime: 120 * 1000,
+            mathjax3: {
+                mathjax: 'plugin/math/mathjax/tex-mml-chtml.js',
+            },
+            markdown: {
+                gfm: true,
+                mangle: true,
+                pedantic: false,
+                smartLists: false,
+                smartypants: false,
+            },
+            mermaid: {
+                theme: isLight ? 'default' : 'dark',
+            },
+            customcontrols: {
+                controls: [
+                ]
+            },
+        };
+
+        if ( pageInIframe() ) {
+            defaultOptions.scrollActivationWidth = 5;
+        }
+
+        // options from URL query string
+        const queryOptions = Reveal().getQueryHash() || {};
+
+        const options = extend(defaultOptions, {"controls":true,"progress":false,"slideNumber":true,"center":true,"transition":"slide","transitionSpeed":"normal","width":1280,"height":800,"margin":0.04,"controlsLayout":"edges","loop":false,"showNotes":false}, queryOptions);
+    </script>
+
+    <script>
+      Reveal.initialize(options);
+    </script>
+</body>
+
+<!-- created with Slides Extended -->
+</html>
